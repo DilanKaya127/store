@@ -1,0 +1,19 @@
+<%# debug @products %>
+
+<%# translation %>
+<h1><%= t ".title"%></h1>
+
+<%= link_to "Yeni ürün", new_product_path if authenticated? %>
+
+<%= link_to "Giriş yap", new_session_path unless authenticated? %>
+
+
+<div id="products">
+    <% @products.each do |product| %>
+        <div>
+            <%= link_to product.name, product %>
+        </div>
+    <% end %>
+</div>
+
+

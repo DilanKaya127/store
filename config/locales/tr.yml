@@ -1,0 +1,8 @@
+# I18n.locale = :tr
+
+tr:
+  hello: "Merhaba Dünya"
+  products:
+    index:
+      title: "Ürünler"
+
