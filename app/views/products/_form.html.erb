@@ -1,22 +1,22 @@
 <%= form_with model: product do |form| %>
   <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :ProductName %>
+    <%= form.text_field :ProductName %>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.rich_text_area :description%>
+    <%= form.label :QuantityPerUnit, style: "display: block" %>
+    <%= form.rich_text_area :QuantityPerUnit%>
   </div>
 
     <div>
-    <%= form.label :featured_image, style: "display: block" %>
-    <%= form.file_field :featured_image, accept: "image/*" %>
+    <%= form.label :FeaturedImage, style: "display: block" %>
+    <%= form.file_field :FeaturedImage, accept: "image/*" %>
   </div>
 
   <div>
-    <%= form.label :inventory_count, style: "display: block"%>
-    <%= form.number_field :inventory_count%>
+    <%= form.label :UnitsInStock, style: "display: block"%>
+    <%= form.number_field :UnitsInStock%>
   </div>
 
   <div>

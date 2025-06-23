@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show]
   before_action :set_product, only: %i[ show edit update destroy]
   def index
-    @products = Product.all
+    @products = Product.all.limit(20)
   end
 
   def show
@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to @product
+      redirect_to @product, notice: "Ürün başarıyla oluşturuldu."
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to @product
+      redirect_to @product, notice: "Ürün başarıyla güncellendi."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to products_path
+    redirect_to products_path, notice: "Ürün başarıyla silindi."
   end
 
   private
@@ -44,6 +44,6 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.expect(product: [ :name, :description, :featured_image, :inventory_count ])
+      params.expect(product: [ :ProductName, :QuantityPerUnit, :FeaturedImage, :UnitsInStock, :UnitPrice ])
     end
 end
