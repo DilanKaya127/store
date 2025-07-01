@@ -1,0 +1,63 @@
+<% if @products && @products.any? %>
+        <% @products.each do |product| %>
+            <div class="supplier-card-row">
+                <!-- Görsel (sol) -->
+                <div class="supplier-card-image">
+                    <% if product.featured_image.present? %>
+                        <%= image_tag product.featured_image.attached? ? product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
+                        alt: product.product_name, 
+                        class: "product-image" %>
+                    <% else %>
+                        <%= image_tag "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
+                        alt: "Resim yok", 
+                        class: "product-image" %>
+                    <% end %>
+                </div>
+
+                <!-- Ürün Bilgisi (orta) -->
+                <div class="supplier-card-info">
+                    <h3 class="product-name"><%= product.product_name %></h3>
+                    <p class="product-price"><%= number_to_currency(product.unit_price, unit: "₺", separator: ",", delimiter: ".") %></p>
+
+                    <% stock_count = product.units_in_stock || 0 %>
+                    <% if stock_count > 10 %>
+                        <span class="stock-label in-stock"><%= stock_count %> adet stokta</span>
+                    <% elsif stock_count > 0 %>
+                        <span class="stock-label low-stock"><%= stock_count %> adet kaldı</span>
+                    <% else %>
+                        <span class="stock-label out-of-stock">Stokta yok</span>
+                    <% end %>
+                </div>
+
+                <!-- İşlemler (sağ) -->
+                <div class="supplier-card-actions">
+                    <%= link_to "Düzenle", edit_product_path(product), class: "btn small" %>
+                    <%= button_to "Sil", product_path(product), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn small danger" %>
+                </div>
+            </div>
+        <% end %>
+    <!-- Pagination (Sayfalama) -->
+    <div class="pagination-wrapper">
+        <%= paginate @products %>
+    </div>
+<% else %>
+    <!-- Boş Durum -->
+    <div class="no-products">
+        <h3>Ürün bulunamadı</h3>
+        <p>Aradığınız kriterlere uygun ürün bulunmamaktadır.</p>
+        <%= link_to "Tüm ürünleri görüntüle", products_path, class: "btn" %>
+    </div>
+<% end %>
+
+<script>
+    // Ürün kartlarına hover efekti için ek JavaScript
+    document.querySelectorAll('.product-card').forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+</script>

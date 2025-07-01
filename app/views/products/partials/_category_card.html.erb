@@ -1,0 +1,17 @@
+<aside class="sidebar">
+    <h3 class="sidebar-title">Kategoriler</h3>
+        
+    <ul id="categories" class="category-list">
+    <li class="category-item">
+        <%= link_to "Tümü", products_path, class: "category-link #{'active' if params[:category_id].blank?}" %>
+    </li>
+    <% if @categories %>
+        <% @categories.each do |category| %>
+            <li class="category-item">
+                <%= link_to category.category_name, products_path(category_id: category.id),
+                class: "category-link #{'active' if params[:category_id] == category.id.to_s}" %>
+            </li>
+        <% end %>
+    <% end %>
+    </ul>      
+</aside>

@@ -63,3 +63,5 @@ group :test do
 end
 
 gem "bundler-audit", "~> 0.9.2", group: :development
+
+gem "kaminari"

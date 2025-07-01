@@ -1,18 +1,132 @@
-<p> <%= link_to "Geri", products_path%> </p>
+<div class="content-area">
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav">
+    <%= link_to "Ana Sayfa", root_path, class: "breadcrumb-link" %>
+    <span class="breadcrumb-separator">›</span>
+    <%= link_to "Ürünler", products_path, class: "breadcrumb-link" %>
+    <span class="breadcrumb-separator">›</span>
+    <span class="breadcrumb-current"><%= truncate(@product.product_name, length: 30) %></span>
+  </nav>
 
-<section class="product">
-  <%= image_tag "products/#{@product.FeaturedImage}" if @product.FeaturedImage %>
-
-    <section class="product-info">
-        <% cache @product do%>
-            <h1><%= @product.ProductName %> </h1>
-            <p><strong>Fiyat:</strong> $<%= @product.UnitPrice %></p>
+  <!-- Product Detail Container -->
+  <div class="product-detail-container">
+    
+    <!-- Product Image Section -->
+    <div class="product-image-section">
+      <div class="product-image-wrapper">
+        <% if @product.featured_image.present? %>
+          <%= image_tag @product.featured_image.attached? ? @product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
+                        alt: @product.product_name, 
+                        class: "product-detail-image" %>
+        <% else %>
+          <div class="product-placeholder">
+            <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21,15 16,10 5,21"/>
+            </svg>
+            <span>Resim Yok</span>
+          </div>
         <% end %>
+      </div>
+    </div>
 
-        <% if authenticated? %>
-            <%= link_to "Düzenle", edit_product_path(@product) %>
-            <%= button_to "Sil", @product, method: :delete, data: { turbo_confirm: "Emin misiniz?" } %>
-        <% end %>
+    <!-- Product Info Section -->
+    <div class="product-info-section">
+      <% cache @product do %>
+        <!-- Product Header -->
+        <div class="product-header">
+          <h1 class="product-detail-title"><%= @product.product_name %></h1>
+          
+          <!-- Stock Status Badge -->
+          <div class="stock-status-badge">
+            <% if @product.units_in_stock > 10 %>
+              <span class="stock-badge in-stock">✓ Stokta</span>
+            <% elsif @product.units_in_stock > 0 %>
+              <span class="stock-badge low-stock">⚠ Az Stokta</span>
+            <% else %>
+              <span class="stock-badge out-of-stock">✗ Stokta Yok</span>
+            <% end %>
+          </div>
+        </div>
 
-  </section>
-</section>
+        <!-- Price Section -->
+        <div class="price-section">
+          <div class="price-main">
+            <span class="price-value"><%= @product.unit_price %></span>
+          </div>
+        </div>
+
+        <!-- Product Details Grid -->
+        <div class="product-details-grid">
+          <div class="detail-item">
+            <div class="detail-label">Stok Miktarı</div>
+            <div class="detail-value"><%= @product.units_in_stock %> adet</div>
+          </div>
+          
+          <div class="detail-item">
+            <div class="detail-label">Birim Ölçüsü</div>
+            <div class="detail-value"><%= @product.quantity_per_unit %></div>
+          </div>
+          
+          <% if @product.supplier.present? %>
+            <div class="detail-item">
+              <div class="detail-label">Tedarikçi</div>
+              <div class="detail-value"><%= @product.supplier.company_name %></div>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="product-actions">
+          <% if @product.units_in_stock > 0 %>
+            <button class="btn-primary add-to-cart">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M3 3h2l.4 2m0 0L8 15h9l3-6H6.4m0 0L5 7H3m15 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-9 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+              </svg>
+              Sepete Ekle
+            </button>
+          <% else %>
+            <button class="btn-disabled" disabled>
+              Stokta Yok
+            </button>
+          <% end %>
+          
+          <button class="btn-secondary add-to-wishlist">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            Favorilere Ekle
+          </button>
+        </div>
+      <% end %>
+
+      <!-- Admin Controls -->
+      <% if can_manage_product?(@product) %>
+        <div class="admin-controls">
+          <h3 class="admin-title">Yönetici İşlemleri</h3>
+          <div class="admin-actions">
+            <%= link_to edit_product_path(@product), class: "btn-admin edit" do %>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+              Düzenle
+            <% end %>
+            
+            <%= button_to @product, method: :delete, 
+                          data: { turbo_confirm: "Bu ürünü silmek istediğinizden emin misiniz?" },
+                          class: "btn-admin delete" do %>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                <line x1="10" y1="11" x2="10" y2="17"/>
+                <line x1="14" y1="11" x2="14" y2="17"/>
+              </svg>
+              Sil
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

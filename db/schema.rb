@@ -10,120 +10,149 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_23_185204) do
-  create_table "Category", primary_key: "Id", force: :cascade do |t|
-    t.string "CategoryName", limit: 8000
-    t.string "Description", limit: 8000
+ActiveRecord::Schema[8.0].define(version: 2025_06_29_155316) do
+  create_table "categories", primary_key: "id", force: :cascade do |t|
+    t.string "category_name", limit: 8000
+    t.string "description", limit: 8000
   end
 
-  create_table "Customer", primary_key: "Id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
-    t.string "CompanyName", limit: 8000
-    t.string "ContactName", limit: 8000
-    t.string "ContactTitle", limit: 8000
-    t.string "Address", limit: 8000
-    t.string "City", limit: 8000
-    t.string "Region", limit: 8000
-    t.string "PostalCode", limit: 8000
-    t.string "Country", limit: 8000
-    t.string "Phone", limit: 8000
-    t.string "Fax", limit: 8000
+  create_table "customers", primary_key: "id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
+    t.string "company_name", limit: 8000
+    t.string "contact_name", limit: 8000
+    t.string "contact_title", limit: 8000
+    t.string "address", limit: 8000
+    t.string "city", limit: 8000
+    t.string "region", limit: 8000
+    t.string "postal_code", limit: 8000
+    t.string "country", limit: 8000
+    t.string "phone", limit: 8000
+    t.string "fax", limit: 8000
   end
 
-  create_table "CustomerCustomerDemo", primary_key: "Id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
-    t.string "CustomerTypeId", limit: 8000
+  create_table "customer_customer_demos", primary_key: "id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
+    t.string "customer_type_id", limit: 8000
   end
 
-  create_table "CustomerDemographic", primary_key: "Id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
-    t.string "CustomerDesc", limit: 8000
+  create_table "customer_demographics", primary_key: "id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
+    t.string "customer_desc", limit: 8000
   end
 
-  create_table "Employee", primary_key: "Id", force: :cascade do |t|
-    t.string "LastName", limit: 8000
-    t.string "FirstName", limit: 8000
-    t.string "Title", limit: 8000
-    t.string "TitleOfCourtesy", limit: 8000
-    t.string "BirthDate", limit: 8000
-    t.string "HireDate", limit: 8000
-    t.string "Address", limit: 8000
-    t.string "City", limit: 8000
-    t.string "Region", limit: 8000
-    t.string "PostalCode", limit: 8000
-    t.string "Country", limit: 8000
-    t.string "HomePhone", limit: 8000
-    t.string "Extension", limit: 8000
-    t.binary "Photo"
-    t.string "Notes", limit: 8000
-    t.integer "ReportsTo"
-    t.string "PhotoPath", limit: 8000
+  create_table "employees", primary_key: "id", force: :cascade do |t|
+    t.string "last_name", limit: 8000
+    t.string "first_name", limit: 8000
+    t.string "title", limit: 8000
+    t.string "title_of_courtesy", limit: 8000
+    t.string "birth_date", limit: 8000
+    t.string "hire_date", limit: 8000
+    t.string "address", limit: 8000
+    t.string "city", limit: 8000
+    t.string "region", limit: 8000
+    t.string "postal_code", limit: 8000
+    t.string "country", limit: 8000
+    t.string "home_phone", limit: 8000
+    t.string "extension", limit: 8000
+    t.binary "photo"
+    t.string "notes", limit: 8000
+    t.integer "reports_to"
+    t.string "photo_path", limit: 8000
   end
 
-  create_table "EmployeeTerritory", primary_key: "Id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
-    t.integer "EmployeeId", null: false
-    t.string "TerritoryId", limit: 8000
+  create_table "employee_territories", primary_key: "id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
+    t.integer "employee_id", null: false
+    t.string "territory_id", limit: 8000
   end
 
-  create_table "Order", primary_key: "Id", force: :cascade do |t|
-    t.string "CustomerId", limit: 8000
-    t.integer "EmployeeId", null: false
-    t.string "OrderDate", limit: 8000
-    t.string "RequiredDate", limit: 8000
-    t.string "ShippedDate", limit: 8000
-    t.integer "ShipVia"
-    t.decimal "Freight", null: false
-    t.string "ShipName", limit: 8000
-    t.string "ShipAddress", limit: 8000
-    t.string "ShipCity", limit: 8000
-    t.string "ShipRegion", limit: 8000
-    t.string "ShipPostalCode", limit: 8000
-    t.string "ShipCountry", limit: 8000
+  create_table "orders", primary_key: "id", force: :cascade do |t|
+    t.string "customer_id", limit: 8000
+    t.integer "employee_id", null: false
+    t.string "order_date", limit: 8000
+    t.string "required_date", limit: 8000
+    t.string "shipped_date", limit: 8000
+    t.integer "ship_via"
+    t.decimal "freight", null: false
+    t.string "ship_name", limit: 8000
+    t.string "ship_address", limit: 8000
+    t.string "ship_city", limit: 8000
+    t.string "ship_region", limit: 8000
+    t.string "ship_postal_code", limit: 8000
+    t.string "ship_country", limit: 8000
   end
 
-  create_table "OrderDetail", primary_key: "Id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
-    t.integer "OrderId", null: false
-    t.integer "ProductId", null: false
-    t.decimal "UnitPrice", null: false
-    t.integer "Quantity", null: false
-    t.float "Discount", null: false
+  create_table "order_details", primary_key: "id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "product_id", null: false
+    t.decimal "unit_price", null: false
+    t.integer "quantity", null: false
+    t.float "discount", null: false
   end
 
-  create_table "Product", primary_key: "Id", force: :cascade do |t|
-    t.string "ProductName", limit: 8000
-    t.integer "SupplierId", null: false
-    t.integer "CategoryId", null: false
-    t.string "QuantityPerUnit", limit: 8000
-    t.decimal "UnitPrice", null: false
-    t.integer "UnitsInStock", null: false
-    t.integer "UnitsOnOrder", null: false
-    t.integer "ReorderLevel", null: false
-    t.integer "Discontinued", null: false
+  create_table "products", primary_key: "id", force: :cascade do |t|
+    t.string "product_name", limit: 8000
+    t.integer "supplier_id", null: false
+    t.integer "category_id", null: false
+    t.string "quantity_per_unit", limit: 8000
+    t.decimal "unit_price", null: false
+    t.integer "units_in_stock", null: false
+    t.integer "units_in_order", null: false
+    t.integer "reorder_level", null: false
+    t.integer "discontinued", null: false
+    t.text "featured_image"
   end
 
-  create_table "Region", primary_key: "Id", force: :cascade do |t|
-    t.string "RegionDescription", limit: 8000
+  create_table "regions", primary_key: "id", force: :cascade do |t|
+    t.string "region_description", limit: 8000
   end
 
-  create_table "Shipper", primary_key: "Id", force: :cascade do |t|
-    t.string "CompanyName", limit: 8000
-    t.string "Phone", limit: 8000
+  create_table "shippers", primary_key: "id", force: :cascade do |t|
+    t.string "company_name", limit: 8000
+    t.string "phone", limit: 8000
   end
 
-  create_table "Supplier", primary_key: "Id", force: :cascade do |t|
-    t.string "CompanyName", limit: 8000
-    t.string "ContactName", limit: 8000
-    t.string "ContactTitle", limit: 8000
-    t.string "Address", limit: 8000
-    t.string "City", limit: 8000
-    t.string "Region", limit: 8000
-    t.string "PostalCode", limit: 8000
-    t.string "Country", limit: 8000
-    t.string "Phone", limit: 8000
-    t.string "Fax", limit: 8000
-    t.string "HomePage", limit: 8000
+  create_table "suppliers", primary_key: "id", force: :cascade do |t|
+    t.string "company_name", limit: 8000
+    t.string "contact_name", limit: 8000
+    t.string "contact_title", limit: 8000
+    t.string "address", limit: 8000
+    t.string "city", limit: 8000
+    t.string "region", limit: 8000
+    t.string "postal_code", limit: 8000
+    t.string "country", limit: 8000
+    t.string "phone", limit: 8000
+    t.string "fax", limit: 8000
+    t.string "homepage", limit: 8000
   end
 
-  create_table "Territory", primary_key: "Id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
-    t.string "TerritoryDescription", limit: 8000
-    t.integer "RegionId", null: false
+  create_table "territories", primary_key: "id", id: { type: :string, limit: 8000 }, force: :cascade do |t|
+    t.string "territory_description", limit: 8000
+    t.integer "region_id", null: false
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -140,8 +169,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_23_185204) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
+    t.integer "supplier_id"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "sessions", "users"
 end

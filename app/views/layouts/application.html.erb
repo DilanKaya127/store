@@ -23,17 +23,91 @@
   </head>
 
   <body>
+    <% if notice %>
+      <div id="notice" class="notice">
+        <%= notice %>
+      </div>
+    <% end %>
 
-    <div class="notice"><%= notice %></div>
 
-    <nav>
-      <%= link_to "Ana sayfa", root_path%>
-      <%= button_to "Çıkış yap", session_path, method: :delete if authenticated? %>
+    <nav class="top-navbar">
+      <div class="navbar-container">
+        <!-- Sol Taraf: Logo ve Ana Menü -->
+        <div class="navbar-left">
+          <%= link_to "Store", root_path, class: "navbar-brand" %>
+          
+          <div class="navbar-menu">
+            <% if authenticated? && current_user.admin? %>
+              <%= link_to "Yeni Ürün", new_product_path, class: "navbar-menu-item" %>
+              <% if current_user.supplier.present? %>
+                <%= link_to "My Products", my_products_path, class: "navbar-menu-item" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Orta: Arama -->
+        <div class="navbar-search">
+          <div class="search-wrapper">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="M21 21l-4.35-4.35"></path>
+            </svg>
+            <%= form_with url: products_path, method: :get, local: true, class: "search-form" do |form| %>
+              <%= form.text_field :search, placeholder: "Ürün ara...", class: "search-input", value: params[:search] %>
+            <% end %>
+          </div>
+        </div>
+        
+        <!-- Sağ Taraf: Kullanıcı İşlemleri ve Dil Seçimi -->
+        <div class="navbar-right">
+          <% if authenticated? %>
+            <div class="user-menu">
+              <%= link_to "Profil", "#", class: "navbar-btn" %>
+              <%= button_to "Çıkış", session_path, method: :delete, class: "navbar-btn outline" %>
+            </div>
+          <% else %>
+            <%= link_to "Giriş", new_session_path, class: "navbar-btn primary" %>
+          <% end %>
+          
+          <!-- Dil Seçimi -->
+          <div class="language-selector">
+            <%= select_tag :locale, 
+                options_for_select([
+                  [content_tag(:span, "🇹🇷 TR", class: "flag-option"), 'tr'], 
+                  [content_tag(:span, "🇺🇸 EN", class: "flag-option"), 'en']
+                ], I18n.locale), 
+                class: "locale-select", 
+                  onchange: "window.location.href = '#{request.path}?locale=' + this.value" ,
+                escape: false %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobil Hamburger Menü (Responsive için) -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </nav>
 
     <main>
       <%= yield %>
     </main>
 
+    <script>
+      // Mobil menü toggle
+      document.addEventListener('DOMContentLoaded', function() {
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const navbar = document.querySelector('.top-navbar');
+        
+        if (mobileToggle) {
+          mobileToggle.addEventListener('click', function() {
+            navbar.classList.toggle('mobile-menu-open');
+          });
+        }
+      });
+    </script>
   </body>
 </html>

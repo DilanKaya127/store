@@ -1,23 +1,25 @@
-<%# debug @products %>
+<div class="main-container">
+    <%= render "products/partials/category_card", product: @product %>
+    <main class="content-area">
 
-<%# translation %>
-<h1><%= t ".title"%></h1>
-
-<%= link_to "Yeni ürün", new_product_path if authenticated? %>
-
-<%= link_to "Giriş yap", new_session_path unless authenticated? %>
-
-
-<div id="products">
-    <% @products.each do |product| %>
-        <div>
-            <%= link_to product.ProductName, product_path(product.Id) %>
-        </div>
-        <div>
-            <h3><%= product.ProductName %></h3>
-            <p>Fiyat: <%= product.UnitPrice %></p>
-            <p>Stok: <%= product.UnitsInStock %></p>
-        </div>
-    <% end %>
+        <%= render "products/partials/filter", product: @product %>
+        <%= render "products/partials/product_card", products: @products %>
+    </main>
 </div>
 
+<script>
+    # // Arama otomatik gönderim (debounce ile)
+    let searchTimeout;
+    document.querySelector('.search-input').addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            this.closest('form').submit();
+        }, 500); // 500ms bekle
+    });
+
+    # // Mobil menü toggle (gelecekte eklenebilir)
+    function toggleMobileMenu() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('mobile-open');
+    }
+</script>

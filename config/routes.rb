@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resource :session
+  resource :session, only: [:new, :create, :destroy]
   resource :unsubscribe, only: [ :show ]
   resources :passwords, param: :token
 
@@ -15,13 +15,20 @@ Rails.application.routes.draw do
   resources :products do
     resources :subscribers, only: [ :create ]
   end
+  resources :categories, only: [ :index, :show ]
+  get "/my_products", to: "products#my_products", as: :my_products
+
   # get "/products",  to: "products/index"
+
   # get "/products/new", to: "products#new"
   # post "/products", to: "products#create"
+
   # get "/products/:id", to: "products#show"
+
   # get "/products/:id/edit", to: "products#edit"
   # patch "/products/:id", to: "products#update"
   # put "/products/:id", to: "products#update"
+
   # delete "/products/:id", to: "products#destroy"
 
   # Diğer route'lar varsa

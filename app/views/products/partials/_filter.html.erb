@@ -1,0 +1,65 @@
+<h1 class="content-title">
+    <%= params[:category_id].present? ? @current_category&.name || 'Ürünler' : 'Tüm Ürünler' %>
+    <small> (<%= @products.total_count %> ürün) </small>
+</h1>
+<div class="content-header">
+    <div class="filter-section">            
+        <%= form_with url: products_path, method: :get, local: true, id: "filter-form" do |form| %>
+            <%= form.hidden_field :search, value: params[:search] %>
+            <%= form.hidden_field :category, value: params[:category] %>
+                
+            <div class="filter-group">
+                <label class="filter-label">Fiyat Aralığı</label>
+                <%= form.select :price_range, 
+                    options_for_select([
+                        ['All Prices', ''],
+                        ['0-10 TL', '0-10'],
+                        ['10-50 TL', '10-50'],
+                        ['50-100 TL', '50-100'],
+                        ['100+ TL', '100+']
+                    ], params[:price_range]), 
+                    {}, 
+                    { class: "filter-select", onchange: "document.getElementById('filter-form').submit();" } %>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Stok Durumu</label>
+                <%= form.select :stock_status, 
+                    options_for_select([
+                        ['Tümü', ''],
+                        ['Stokta Var', 'in_stock'],
+                        ['Stokta Yok', 'out_of_stock']
+                    ], params[:stock_status]), 
+                    {}, 
+                    { class: "filter-select", onchange: "document.getElementById('filter-form').submit();" } %>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Sıralama</label>
+                <%= form.select :sort_by, 
+                    options_for_select([
+                        ['Varsayılan', ''],
+                        ['Fiyat (Düşük-Yüksek)', 'price_asc'],
+                        ['Fiyat (Yüksek-Düşük)', 'price_desc'],
+                        ['Alfabetik', 'name_asc']
+                    ], params[:sort_by]), 
+                    {}, 
+                    { class: "filter-select", onchange: "document.getElementById('filter-form').submit();" } %>
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">Sayfa başına:</span>
+                <%= form_with url: products_path, method: :get, local: true do |form| %>                 
+                    <%= form.select :per_page, 
+                        options_for_select([
+                            ['20', 20],
+                            ['50', 50],
+                            ['100', 100]
+                        ], params[:per_page] || 20), 
+                        {}, 
+                        { class: "items-select", onchange: "this.form.submit();" } %>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+</div>

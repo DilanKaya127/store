@@ -1,0 +1,112 @@
+<div class="form-container">
+  <h2 class="form-title">Ürün Ekle</h2>
+  
+  <%= form_with model: product, local: true do |form| %>
+    <!-- Product Name -->
+    <div class="field-group">
+      <%= form.label :product_name, "Ürün Adı", class: "field-label" %>
+      <%= form.text_field :product_name, class: "form-input", placeholder: "Ürün adını girin" %>
+    </div>
+
+    <!-- Category -->
+    <div class="field-group">
+      <%= form.label :category_id, "Kategori", class: "field-label" %>
+      <%= form.select :category_id, 
+          options_from_collection_for_select(@categories, :id, :category_name, product.category_id),
+          { prompt: "Kategori seçin" }, 
+          { class: "form-select" } %>
+    </div>
+
+    <!-- Quantity Per Unit -->
+    <div class="field-group">
+      <%= form.label :quantity_per_unit, "Birim Başına Miktar", class: "field-label" %>
+      <%= form.rich_text_area :quantity_per_unit, class: "form-textarea rich-textarea", placeholder: "Ürün açıklamasını girin" %>
+    </div>
+
+    <!-- Featured Image -->
+    <div class="field-group">
+      <%= form.label :featured_image, "Ürün Görseli", class: "field-label" %>
+      <div class="file-input-wrapper">
+        <%= form.file_field :featured_image, accept: "image/*", class: "file-input" %>
+        <label for="<%= form.field_id(:featured_image) %>" class="file-input-label">
+          <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+          </svg>
+          Görsel seçin veya sürükleyin
+        </label>
+      </div>
+    </div>
+
+    <!-- Units in Stock -->
+    <div class="field-group">
+      <%= form.label :units_in_stock, "Stok Miktarı", class: "field-label" %>
+      <%= form.number_field :units_in_stock, class: "form-input", placeholder: "0", min: 0 %>
+    </div>
+
+    <!-- Unit Price -->
+    <div class="field-group">
+      <%= form.label :unit_price, "Birim Fiyat", class: "field-label" %>
+      <div class="currency-input-wrapper">
+        <span class="currency-symbol">₺</span>
+        <%= form.number_field :unit_price, step: "0.01", class: "form-input currency-input", placeholder: "0.00", min: 0 %>
+      </div>
+    </div>
+
+    <!-- Units On Order -->
+    <div class="field-group">
+      <%= form.label :units_in_order, "Sipariş Üzerindeki Miktar", class: "field-label" %>
+      <%= form.number_field :units_in_order, class: "form-input", placeholder: "0", min: 0 %>
+    </div>
+
+    <!-- Reorder Level -->
+    <div class="field-group">
+      <%= form.label :reorder_level, "Yeniden Sipariş Seviyesi", class: "field-label" %>
+      <%= form.number_field :reorder_level, class: "form-input", placeholder: "0", min: 0 %>
+    </div>
+
+    <!-- discontinued -->
+    <div class="field-group">
+      <%= form.label :discontinued, "Durumu", class: "field-label" %>
+      <%= form.check_box :discontinued, class: "form-checkbox" %>
+    </div>
+
+    <!-- Submit Button -->
+    <%= form.submit "Ürünü Kaydet", class: "submit-button" %>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // File input preview functionality
+    const fileInput = document.querySelector('.file-input');
+    if (fileInput) {
+      fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const label = e.target.nextElementSibling;
+        
+        if (file) {
+          label.innerHTML = `
+            <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            ${file.name}
+          `;
+          label.style.color = '#10b981';
+          label.style.borderColor = '#10b981';
+          label.style.backgroundColor = '#f0fdf4';
+        }
+      });
+    }
+
+    // Form submission with loading state
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        const submitBtn = document.querySelector('.submit-button');
+        if (submitBtn) {
+          submitBtn.classList.add('loading');
+        }
+      });
+    }
+  });
+</script>
