@@ -1,6 +1,6 @@
 <h1 class="content-title">
-    <%= params[:category_id].present? ? @current_category&.name || 'Ürünler' : 'Tüm Ürünler' %>
-    <small> (<%= @products.total_count %> ürün) </small>
+    <%= params[:category_id].present? ? t("categories.names.#{@current_category.id}") : t("products.index.all_products") %>
+    <small> (<%= @products.total_count %>) </small>
 </h1>
 <div class="content-header">
     <div class="filter-section">            
@@ -9,10 +9,10 @@
             <%= form.hidden_field :category, value: params[:category] %>
                 
             <div class="filter-group">
-                <label class="filter-label">Fiyat Aralığı</label>
+                <label class="filter-label"><%= t("products.filter.price_range") %></label>
                 <%= form.select :price_range, 
                     options_for_select([
-                        ['All Prices', ''],
+                        [t("products.filter.all_prices"), ''],
                         ['0-10 TL', '0-10'],
                         ['10-50 TL', '10-50'],
                         ['50-100 TL', '50-100'],
@@ -23,32 +23,32 @@
             </div>
 
             <div class="filter-group">
-                <label class="filter-label">Stok Durumu</label>
+                <label class="filter-label"><%= t("products.filter.stock_status") %></label>
                 <%= form.select :stock_status, 
                     options_for_select([
-                        ['Tümü', ''],
-                        ['Stokta Var', 'in_stock'],
-                        ['Stokta Yok', 'out_of_stock']
+                        [t("products.filter.all"), ''],
+                        [t("products.filter.in_stock"), 'in_stock'],
+                        [t("products.filter.out_of_stock"), 'out_of_stock']
                     ], params[:stock_status]), 
                     {}, 
                     { class: "filter-select", onchange: "document.getElementById('filter-form').submit();" } %>
             </div>
 
             <div class="filter-group">
-                <label class="filter-label">Sıralama</label>
+                <label class="filter-label"><%= t("products.filter.sort_by") %></label>
                 <%= form.select :sort_by, 
                     options_for_select([
-                        ['Varsayılan', ''],
-                        ['Fiyat (Düşük-Yüksek)', 'price_asc'],
-                        ['Fiyat (Yüksek-Düşük)', 'price_desc'],
-                        ['Alfabetik', 'name_asc']
+                        [t("products.filter.default"), ''],
+                        [t("products.filter.price_asc"), 'price_asc'],
+                        [t("products.filter.price_desc"), 'price_desc'],
+                        [t("products.filter.name_asc"), 'name_asc']
                     ], params[:sort_by]), 
                     {}, 
                     { class: "filter-select", onchange: "document.getElementById('filter-form').submit();" } %>
             </div>
 
             <div class="filter-group">
-                <span class="filter-label">Sayfa başına:</span>
+                <span class="filter-label"><%= t("products.filter.per_page") %>:</span>
                 <%= form_with url: products_path, method: :get, local: true do |form| %>                 
                     <%= form.select :per_page, 
                         options_for_select([

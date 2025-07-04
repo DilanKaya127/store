@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users, only: [ :new, :create ]
   resource :session, only: [:new, :create, :destroy]
   resource :unsubscribe, only: [ :show ]
   resources :passwords, param: :token
@@ -10,33 +11,13 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-
-
   resources :products do
     resources :subscribers, only: [ :create ]
   end
   resources :categories, only: [ :index, :show ]
   get "/my_products", to: "products#my_products", as: :my_products
 
-  # get "/products",  to: "products/index"
-
-  # get "/products/new", to: "products#new"
-  # post "/products", to: "products#create"
-
-  # get "/products/:id", to: "products#show"
-
-  # get "/products/:id/edit", to: "products#edit"
-  # patch "/products/:id", to: "products#update"
-  # put "/products/:id", to: "products#update"
-
-  # delete "/products/:id", to: "products#destroy"
-
-  # Diğer route'lar varsa
-  # resources :categories
-  # resources :suppliers
-
   root "products#index"
-
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

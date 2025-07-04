@@ -7,7 +7,7 @@ module Product::Notifications
     end
 
     def back_in_stock?
-        inventory_count_previously_was == 0 && inventory_count > 0
+        units_in_stock_previously_was == 0 && units_in_stock > 0
     end
 
     def notify_subscribers

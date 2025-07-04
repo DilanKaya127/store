@@ -1013,6 +1013,81 @@
   padding-right: 40px;
 }
 
+.tab-button {
+  flex: 1;
+  padding: 18px 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #6b7280;
+  transition: background 0.2s, color 0.2s, border-bottom 0.2s;
+  outline: none;
+  background-color: #f3f4f6;
+}
+
+.tab-button:hover {
+  background-color: #e0e7ef;
+  color: #007aff;
+}
+
+.tab-button.active {
+  border-bottom: 3px solid #007aff;
+  background-color: #fff;
+  color: #1d1d1f;
+  z-index: 2;
+}
+
+.auth-form {
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 2.5rem 2rem 2rem 2rem;
+  margin-top: -2px;
+  animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-container {
+  max-width: 420px;
+  margin: 2.5rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  padding: 0;
+  overflow: hidden;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #007aff;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+/* Giriş/Kayıt formu içindeki "Forgot password?" linki */
+.auth-form a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #5856d6;
+  font-size: 0.97rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.auth-form a:hover {
+  color: #007aff;
+  text-decoration: underline;
+}
+
 /* File Input */
 .file-input-wrapper {
   position: relative;

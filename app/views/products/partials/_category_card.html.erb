@@ -1,14 +1,14 @@
 <aside class="sidebar">
-    <h3 class="sidebar-title">Kategoriler</h3>
+    <h3 class="sidebar-title"><%= t('categories.index.title') %></h3>
         
     <ul id="categories" class="category-list">
     <li class="category-item">
-        <%= link_to "Tümü", products_path, class: "category-link #{'active' if params[:category_id].blank?}" %>
+        <%= link_to t('categories.names.all'), products_path, class: "category-link #{'active' if params[:category_id].blank?}" %>
     </li>
     <% if @categories %>
         <% @categories.each do |category| %>
             <li class="category-item">
-                <%= link_to category.category_name, products_path(category_id: category.id),
+                <%= link_to t("categories.names.#{category.id}"), products_path(category_id: category.id),
                 class: "category-link #{'active' if params[:category_id] == category.id.to_s}" %>
             </li>
         <% end %>

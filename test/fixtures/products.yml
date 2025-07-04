@@ -4,8 +4,13 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+alice_mutton:
+  product_name: Alice Mutton
+  units_in_stock: 0
+  supplier: acme_supplier
+  category: meats
+  unit_price: 39.00
+  units_in_order: 0
+  reorder_level: 10
+  discontinued: false
+

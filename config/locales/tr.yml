@@ -5,4 +5,31 @@ tr:
   products:
     index:
       title: "Ürünler"
+      all_products: "Tüm Ürünler"
+    filter:
+      price_range: "Fiyat Aralığı"
+      all_prices: "Tüm Fiyatlar"
+      stock_status: "Stok Durumu"
+      all: "Tümü"
+      in_stock: "Stokta Var"
+      out_of_stock: "Stokta Yok"
+      sort_by: "Sıralama"
+      default: "Varsayılan"
+      price_asc: "Fiyat (Düşük-Yüksek)"
+      price_desc: "Fiyat (Yüksek-Düşük)"
+      name_asc: "Alfabetik"
+      per_page: "Sayfa başına"
+  categories:
+    index:
+      title: "Kategoriler"
+    names:
+      all: "Tümü"
+      1: "İçecekler"
+      2: "Soslar"
+      3: "Şekerlemeler"
+      4: "Süt Ürünleri"
+      5: "Tahıllar"
+      6: "Et/Tavuk"
+      7: "Meyve/Sebze"
+      8: "Deniz Ürünleri"
 

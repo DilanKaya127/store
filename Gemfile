@@ -16,6 +16,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+gem 'htmlbeautifier'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
@@ -65,3 +66,5 @@ end
 gem "bundler-audit", "~> 0.9.2", group: :development
 
 gem "kaminari"
+
+gem "simple_form", "~> 5.3"

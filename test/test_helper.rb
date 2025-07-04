@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+ActiveJob::Base.queue_adapter = :inline
 
 module ActiveSupport
   class TestCase

@@ -1,0 +1,17 @@
+<div class="form-container">
+  <div class="auth-form">
+    <h2 class="form-title">Kayıt Ol</h2>
+    <%= form_with model: @user, local: true do |form| %>
+      <div class="field-group"><%= form.label :email_address, "E-posta", class: "field-label" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, class: "form-input", autocomplete: "username", placeholder: "E-posta adresinizi girin" %>
+      </div>
+      <div class="field-group"><%= form.label :password, "Şifre", class: "field-label" %>
+        <%= form.password_field :password, required: true, class: "form-input", autocomplete: "new-password", placeholder: "Şifrenizi girin", maxlength: 72 %>
+      </div>
+      <%= link_to "Zaten kayıtlı mısın? Giriş yap.", new_session_path %>
+      <div class="actions">
+        <%= form.submit "Kayıt Ol", class: "submit-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

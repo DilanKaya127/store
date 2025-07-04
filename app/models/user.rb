@@ -8,6 +8,9 @@ class User < ApplicationRecord
 
   # rol validations
   validates :role, inclusion: { in: %w[user admin] }
+  validates :email_address, presence: true, uniqueness: true, length: { maximum: 255 }
+  # validates :first_name, presence: true, length: { maximum: 255 }
+  # validates :last_name, presence: true, length: { maximum: 255 }
 
   def admin?
     role == "admin"
@@ -15,6 +18,12 @@ class User < ApplicationRecord
 
   def user?
     role == "user"
+  end
+
+  before_validation :set_default_role, on: :create
+
+  def set_default_role
+    self.role ||= "user"
   end
 
   # admin kullanıcının supplier'ına ait ürünleri yönetebilir

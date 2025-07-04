@@ -32,4 +32,31 @@ en:
   products:
     index:
       title: "Products"
+      all_products: "All Products"
+    filter:
+      price_range: "Price Range"
+      all_prices: "All Prices"
+      stock_status: "Stock Status"
+      all: "All"
+      in_stock: "In Stock"
+      out_of_stock: "Out of Stock"
+      sort_by: "Sort By"
+      default: "Default"
+      price_asc: "Price (Low-High)"
+      price_desc: "Price (High-Low)"
+      name_asc: "Alphabetical"
+      per_page: "Per page"
+  categories:
+    index:
+      title: "Categories"
+    names:
+      all: "All"
+      1: "Beverages"
+      2: "Condiments"
+      3: "Confections"
+      4: "Dairy Products"
+      5: "Grains/Cereals"
+      6: "Meat/Poultry"
+      7: "Produce"
+      8: "Seafood"
 

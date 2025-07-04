@@ -1,8 +1,15 @@
-<h1>Forgot your password?</h1>
-
 <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-
-<%= form_with url: passwords_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.submit "Email reset instructions" %>
-<% end %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div class="form-container">
+  <div class="auth-form">
+    <h2 class="form-title">Şifrenizi Unuttunuz mu?</h2>
+    <%= form_with url: passwords_path do |form| %>
+      <div class="field-group"><%= form.label :email_address, "E-posta", class: "field-label" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, value: params[:email_address], class: "form-input", autocomplete: "username", placeholder: "E-posta adresinizi girin" %>
+      </div>
+      <div class="actions">
+        <%= form.submit "Sıfırlama e-postası gönderin", class: "submit-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

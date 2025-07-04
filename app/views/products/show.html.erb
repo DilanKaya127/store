@@ -7,10 +7,9 @@
     <span class="breadcrumb-separator">›</span>
     <span class="breadcrumb-current"><%= truncate(@product.product_name, length: 30) %></span>
   </nav>
-
   <!-- Product Detail Container -->
+  <%= render "products/partials/inventory", product: @product %>
   <div class="product-detail-container">
-    
     <!-- Product Image Section -->
     <div class="product-image-section">
       <div class="product-image-wrapper">
@@ -30,14 +29,12 @@
         <% end %>
       </div>
     </div>
-
     <!-- Product Info Section -->
     <div class="product-info-section">
       <% cache @product do %>
         <!-- Product Header -->
         <div class="product-header">
           <h1 class="product-detail-title"><%= @product.product_name %></h1>
-          
           <!-- Stock Status Badge -->
           <div class="stock-status-badge">
             <% if @product.units_in_stock > 10 %>
@@ -49,26 +46,23 @@
             <% end %>
           </div>
         </div>
-
+        <%= render "products/partials/inventory", product: @product %>
         <!-- Price Section -->
         <div class="price-section">
           <div class="price-main">
             <span class="price-value"><%= @product.unit_price %></span>
           </div>
         </div>
-
         <!-- Product Details Grid -->
         <div class="product-details-grid">
           <div class="detail-item">
             <div class="detail-label">Stok Miktarı</div>
             <div class="detail-value"><%= @product.units_in_stock %> adet</div>
           </div>
-          
           <div class="detail-item">
             <div class="detail-label">Birim Ölçüsü</div>
             <div class="detail-value"><%= @product.quantity_per_unit %></div>
           </div>
-          
           <% if @product.supplier.present? %>
             <div class="detail-item">
               <div class="detail-label">Tedarikçi</div>
@@ -76,7 +70,6 @@
             </div>
           <% end %>
         </div>
-
         <!-- Action Buttons -->
         <div class="product-actions">
           <% if @product.units_in_stock > 0 %>
@@ -91,7 +84,6 @@
               Stokta Yok
             </button>
           <% end %>
-          
           <button class="btn-secondary add-to-wishlist">
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -100,7 +92,6 @@
           </button>
         </div>
       <% end %>
-
       <!-- Admin Controls -->
       <% if can_manage_product?(@product) %>
         <div class="admin-controls">
@@ -113,7 +104,6 @@
               </svg>
               Düzenle
             <% end %>
-            
             <%= button_to @product, method: :delete, 
                           data: { turbo_confirm: "Bu ürünü silmek istediğinizden emin misiniz?" },
                           class: "btn-admin delete" do %>
