@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "home/index"
   resources :users, only: [ :new, :create ]
   resource :session, only: [:new, :create, :destroy]
   resource :unsubscribe, only: [ :show ]
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
   resources :categories, only: [ :index, :show ]
   get "/my_products", to: "products#my_products", as: :my_products
 
-  root "products#index"
+  root "home#index"
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

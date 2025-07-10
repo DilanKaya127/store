@@ -132,8 +132,7 @@ class ProductsController < ApplicationController
     products = products.page(params[:page]).per(per_page)
 
     products
-end
-
+  end
 
   private
 

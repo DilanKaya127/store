@@ -22,13 +22,21 @@
   --secondary-color: #5856d6;
   --success-color: #10b981;
   --error-color: #ef4444;
-  --background-color: #f8f9fa;
   --card-background: #ffffff;
   --text-primary: #1d1d1f;
   --text-secondary: #6b7280;
   --border-color: #e5e7eb;
   --border-radius: 12px;
-  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  /* Arka Plan Renkleri */
+  --bg-primary: #fdfdfd;
+  --bg-secondary: #f8f9fa;
+  --bg-card: rgba(139, 92, 246, 0.08);
+  --bg-card-hover: rgba(139, 92, 246, 0.15);
+
+  /* Border ve Efekt Renkleri */
+  --border-primary: rgba(0, 0, 0, 0.1);
 }
 
 /* Tüm animasyonlar için GPU ivmesi */
@@ -45,8 +53,8 @@
 }
   body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background-color: #f8f9fa;
-  color: #1d1d1f;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   line-height: 1.6;
 }
   nav {
@@ -65,6 +73,7 @@
   main {
     max-width: 1200px;
     margin: 0 auto;
+    padding-top: 90px;
   }
   
   /* Notice Mesajları */
@@ -101,23 +110,27 @@
 
 /* Üst Navigasyon */
 .top-navbar {
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px); 
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-primary);  
   z-index: 1000;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease;
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* padding: 1rem 2rem; */
+  max-width: 1200px;
+  margin: 0 auto;
   height: 90px;
   padding: 0 2rem;
-  position: relative;
   flex-wrap: inherit;
 }
 
@@ -132,7 +145,9 @@
 .navbar-brand {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1d1d1f;
+  color: var(--text-primary);
+  background-clip: text;
+  transition: all 0.3s ease;
   text-decoration: none;
   transition: color 0.2s ease;
   letter-spacing: -0.5px;
@@ -169,7 +184,7 @@
   flex: 1;
   max-width: 500px;
   margin: 0 2rem;
-  /* position: relative; */
+  position: relative;
 }
 
 .search-wrapper {
@@ -190,7 +205,7 @@
   background-color: #f8f9fa;
   transition: all 0.2s ease;
   outline: none;
-  color: #1d1d1f;
+  color: var(--text-primary);
 }
 
 .search-input:focus {
@@ -319,8 +334,12 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
-  display: flex;
+  /* display: flex; */
   gap: 2rem;
+}
+
+#products-index.main-container{
+  display: flex;
 }
 
 /* Sol Sidebar - Kategoriler */
@@ -343,7 +362,63 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: #1d1d1f;
+  color: var(--text-primary);
+}
+
+.category-section {
+  display: flex;
+  overflow-x: auto;
+  padding: 2rem 2rem;
+  gap: 1.5rem;
+  scroll-snap-type: x mandatory;
+  animation: autoScroll 18s linear infinite;
+  scroll-behavior: smooth;
+}
+
+@keyframes autoScroll {
+  0% { scroll-left: 0; }
+  100% { scroll-left: 9999px; }
+}
+
+.category-section::-webkit-scrollbar {
+  display: none;
+}
+
+.category-card {
+  flex: 0 0 auto;
+  width: 180px;
+  height: 200px;
+  background-color: #f3f4f6;
+  border-radius: 1rem;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 14px rgba(0,0,0,0.15);
+}
+
+.category-card .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.category-card .title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+  /* display: block; */
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.category-card .title.active {
+  font-weight: 700;
 }
 
 .category-list {
@@ -381,7 +456,7 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #1d1d1f;
+  color: var(--text-primary);
 }
 
 #filter-form {
@@ -423,7 +498,8 @@
 /* Ana İçerik Alanı */
 .content-area {
   flex: 1;
-  position: relative;
+  /* flex-wrap: wrap; */
+  /* position: relative; */
 }
 
 .content-header {
@@ -437,7 +513,7 @@
 .content-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-primary);
 }
 
 .items-per-page {
@@ -469,6 +545,22 @@
   margin-top: 2rem;
   text-align: center;
 }
+
+.reorder_level_section{
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #e5e7eb;
+  /* display:; */
+  /* flex-wrap: wrap; */
+}
+
+.reorder_level_section .products-grid{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
 
 /* Ürün Kartları Grid */
 .products-grid {
@@ -510,7 +602,7 @@
 .product-name {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   line-height: 1.4;
   display: -webkit-box;
@@ -621,7 +713,7 @@
 }
 
 .breadcrumb-current {
-  color: #1d1d1f;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -699,7 +791,7 @@
 .product-detail-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1d1d1f;
+  color: var(--text-primary);
   line-height: 1.2;
   margin: 0;
   flex: 1;
@@ -813,7 +905,7 @@
 
 .detail-value {
   font-size: 1.1rem;
-  color: #1d1d1f;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -954,7 +1046,7 @@
 .form-title {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #1d1d1f;
+  color: var(--text-primary);
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -1036,7 +1128,7 @@
 .tab-button.active {
   border-bottom: 3px solid #007aff;
   background-color: #fff;
-  color: #1d1d1f;
+  color: var(--text-primary);
   z-index: 2;
 }
 
@@ -1045,7 +1137,7 @@
   border-radius: 0 0 12px 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.07);
   padding: 2.5rem 2rem 2rem 2rem;
-  margin-top: -2px;
+  /* margin-top: -2px; */
   animation: fadeIn 0.4s;
 }
 
@@ -1244,6 +1336,54 @@
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
+footer {
+  padding: 30px 160px;
+  background: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  position: relative;
+  border-top: 1px solid var(--border-primary);
+  box-shadow: var(--box-shadow);
+  /* bottom:0; */
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.footer-info{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.footer-info a{
+  text-decoration: none;
+  color: var(--text-secondary);
+}
+
+.social-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  /* position: relative; */
+  /* z-index: 2; */
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-primary);
+  border-radius: 50%;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
 
 /* Mobil Hamburger Menü */
 .mobile-menu-toggle {
@@ -1289,6 +1429,10 @@
     flex-direction: column;
     gap: 1rem;
   }
+
+  #products-index.main-container{
+    flex-direction: column;
+  }
   
   .sidebar {
     width: 100%;
@@ -1299,6 +1443,12 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
+
+  .reorder_level_section .products-grid{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
   
   .navbar-container {
     height: 60px;

@@ -1,10 +1,9 @@
-<div class="main-container">
+<div class="main-container" id="products-index">
     <%= render "products/partials/category_card", product: @product %>
-    <main class="content-area">
-
+    <div class="content-area">
         <%= render "products/partials/filter", product: @product %>
         <%= render "products/partials/product_card", products: @products %>
-    </main>
+    </div>
 </div>
 
 <script>
