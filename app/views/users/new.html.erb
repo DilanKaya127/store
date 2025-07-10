@@ -2,6 +2,9 @@
   <div class="auth-form">
     <h2 class="form-title">Kayıt Ol</h2>
     <%= form_with model: @user, local: true do |form| %>
+      <div class="field-group"><%= form.label :full_name, "İsim", class: "field-label" %>
+        <%= form.text_field :full_name, required: true, autofocus: true, class: "form-input", autocomplete: "name", placeholder: "Adınızı ve soyadınızı girin" %>
+      </div>
       <div class="field-group"><%= form.label :email_address, "E-posta", class: "field-label" %>
         <%= form.email_field :email_address, required: true, autofocus: true, class: "form-input", autocomplete: "username", placeholder: "E-posta adresinizi girin" %>
       </div>

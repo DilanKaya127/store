@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[new create]
-  
+
   def new
     @user = User.new
   end
@@ -14,7 +14,8 @@ class UsersController < ApplicationController
     else
       @user = User.new(user_params)
       if @user.save
-        redirect_to root_path
+        flash[:notice] = "Başarıyla kayıt oldunuz. Şimdi giriş yapabilirsiniz."
+        redirect_to new_session_path
       else
         flash.now[:alert] = "Kayıt başarısız: Lütfen eksik alanları düzeltin."
         render :new, status: :unprocessable_entity
@@ -22,9 +23,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:email_address, :password)
+    params.require(:user).permit(:email_address, :password, :full_name)
   end
 end

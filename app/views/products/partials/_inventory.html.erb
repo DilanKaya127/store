@@ -1,8 +1,8 @@
-<% if product.units_in_stock? %>
-  <p><%= product.units_in_stock %> in stock</p>
+<% if product.units_in_stock > 10 %>
+<% elsif product.units_in_stock < 10 && product.units_in_stock > 0 %>
+  <p>Stoklar tükenmek üzere. Acele edin!</p>
 <% else %>
-  <p>Out of stock</p>
-  <p>Email me when available.</p>
+  <p>Stok tükendi. Tekrar stoğa girince haber almak ister misin?</p>
   <%= form_with model: [product, Subscriber.new] do |form| %>
     <%= form.email_field :email, placeholder: "you@example.com", required: true %>
     <%= form.submit "Submit" %>

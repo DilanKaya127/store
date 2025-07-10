@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="form-container" data-controller="product-form">
   <h2 class="form-title">Ürün Ekle</h2>
   
   <%= form_with model: product, local: true do |form| %>
@@ -74,39 +74,3 @@
     <%= form.submit "Ürünü Kaydet", class: "submit-button" %>
   <% end %>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // File input preview functionality
-    const fileInput = document.querySelector('.file-input');
-    if (fileInput) {
-      fileInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const label = e.target.nextElementSibling;
-        
-        if (file) {
-          label.innerHTML = `
-            <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            ${file.name}
-          `;
-          label.style.color = '#10b981';
-          label.style.borderColor = '#10b981';
-          label.style.backgroundColor = '#f0fdf4';
-        }
-      });
-    }
-
-    // Form submission with loading state
-    const form = document.querySelector('form');
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        const submitBtn = document.querySelector('.submit-button');
-        if (submitBtn) {
-          submitBtn.classList.add('loading');
-        }
-      });
-    }
-  });
-</script>

@@ -1,54 +1,13 @@
   <h2>Kategoriler</h2>
-  <section class="category-section"> 
+  <section class="category-section" data-controller="category-scroll"> 
     <% @categories.each do |category| %> 
-      <div class="category-card">
+      <%= link_to products_path(category_id: category.id), class: "category-card" do %>
         <div class="icon"><%= category_icon(category.category_name) %></div>
         <div>
-          <%= link_to t("categories.names.#{category.id}"), products_path(category_id: category.id),
-          class: "title #{'active' if params[:category_id] == category.id.to_s}" %>
+          <span class="title #{'active' if params[:category_id] == category.id.to_s}"><%= t("categories.names.#{category.id}") %></span>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </section>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const section = document.querySelector(".category-section");
-    const cards = section.querySelectorAll(".category-card");
-
-    // Kartları klonla ve sonuna ekle
-    cards.forEach(card => {
-      const clone = card.cloneNode(true);
-      clone.classList.add("cloned");
-      section.appendChild(clone);
-    });
-
-    let scrollAmount = 0;
-    let isPaused = false;
-
-    function autoScroll() {
-      if (!isPaused) {
-        scrollAmount += 1;
-        section.scrollLeft = scrollAmount;
-
-        if (scrollAmount >= section.scrollWidth / 2) {
-          scrollAmount = 0;
-        }
-      }
-      requestAnimationFrame(autoScroll);
-    }
-
-    autoScroll();
-
-    // Hover ile durdurma
-    section.addEventListener("mouseover", function () {
-      isPaused = true;
-    });
-
-    section.addEventListener("mouseout", function () {
-      isPaused = false;
-    });
-  });
-</script>
 
 

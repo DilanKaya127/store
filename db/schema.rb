@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_01_212651) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_10_183303) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -62,7 +62,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_01_212651) do
     t.string "customer_desc", limit: 8000
   end
 
-  create_table "customers", id: { type: :string, limit: 8000 }, force: :cascade do |t|
+  create_table "customers", force: :cascade do |t|
     t.string "company_name", limit: 8000
     t.string "contact_name", limit: 8000
     t.string "contact_title", limit: 8000
@@ -109,7 +109,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_01_212651) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "customer_id", limit: 8000
+    t.integer "customer_id", null: false
     t.integer "employee_id", null: false
     t.string "order_date", limit: 8000
     t.string "required_date", limit: 8000
@@ -189,6 +189,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_01_212651) do
     t.datetime "updated_at", null: false
     t.string "role"
     t.integer "supplier_id"
+    t.integer "customer_id"
+    t.string "full_name"
+    t.index ["customer_id"], name: "index_users_on_customer_id"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
