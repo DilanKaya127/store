@@ -35,6 +35,20 @@
         <!-- Sol Taraf: Logo ve Ana Menü -->
         <div class="navbar-left">
           <%= link_to "Store", root_path, class: "navbar-brand" %>
+          <div class="dropdown" data-controller="dropdown">
+              <button class="navbar-btn dropdown-toggle" id="categoryDropdown" type="button">
+                <%= t('categories.index.title') %>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="categoryDropdown">
+                <%= link_to t('categories.names.all'), products_path, class: "dropdown-item" %>
+                <% if @categories %>
+                  <% @categories.each do |category| %>
+                      <%= link_to t("categories.names.#{category.id}"), products_path(category_id: category.id),
+                      class: "dropdown-item" %>
+                  <% end %>
+                <% end %>
+              </div>
+          </div>
         </div>
 
         <!-- Orta: Arama -->
@@ -52,6 +66,8 @@
         
         <!-- Sağ Taraf: Kullanıcı İşlemleri ve Dil Seçimi -->
         <div class="navbar-right">
+          <%= link_to "Sepet 🧺", new_session_path, class: "navbar-btn dropdown-toggle" %>
+          <%= link_to "Favoriler ❤️", new_session_path, class: "navbar-btn" %>
           <% if authenticated? %>
             <div class="user-menu dropdown" data-controller="dropdown">
               <button class="navbar-btn dropdown-toggle" id="accountDropdown" type="button">
@@ -75,8 +91,8 @@
           <div class="language-selector">
             <%= select_tag :locale, 
                 options_for_select([
-                  [content_tag(:span, "🇹🇷 TR", class: "flag-option"), 'tr'], 
-                  [content_tag(:span, "🇺🇸 EN", class: "flag-option"), 'en']
+                  [content_tag(:span, "TR", class: "flag-option"), 'tr'], 
+                  [content_tag(:span, "EN", class: "flag-option"), 'en']
                 ], I18n.locale), 
                 class: "locale-select", 
                   onchange: "window.location.href = '#{request.path}?locale=' + this.value" ,

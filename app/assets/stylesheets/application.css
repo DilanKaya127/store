@@ -172,20 +172,21 @@ main {
   margin: 0 0;
   width: 1200px;
   height: 90px;
-  gap: 4rem;
+  gap: 2rem;
   /* padding: 0 2rem; */
 }
 
 /* Sol Taraf - Logo ve Menü */
 .navbar-left {
   display: flex;
-  justify-content: flex-start;
-  /* gap: 2rem; */
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
   flex: 0 0 auto;
 }
 
 .navbar-brand {
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);
   background-clip: text;
@@ -196,13 +197,12 @@ main {
 }
 
 .navbar-brand:hover {
-  color: #007aff;
+  color: var(--primary-color);
 }
 
 .navbar-search {
   flex: 1;
-  width: 500px;
-  margin: 0 2rem;
+  width: 400px;
   position: relative;
 }
 
@@ -228,7 +228,7 @@ main {
 }
 
 .search-input:focus {
-  border-color: #007aff;
+  border-color: var(--primary-color);
   background-color: #ffffff;
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
@@ -270,31 +270,31 @@ main {
 .navbar-btn {
   padding: 10px 16px;
   border: 1px solid #e5e7eb;
-  border-radius: 20px;
+  border-radius: 50px;
   background-color: #ffffff;
-  color: #374151;
+  color: #1d1d1f;
   text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 400;
   transition: all 0.2s ease;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  /* min-height: 40px; */
 }
 
 .navbar-btn:hover {
-  background-color: #007aff;
+  background-color: var(--primary-color);
   color: #ffffff;
-  border-color: #007aff;
+  border-color: var(--primary-color);
   transform: translateY(-1px);
 }
 
 .navbar-btn.primary {
-  background-color: #007aff;
+  background-color: var(--primary-color);
   color: #ffffff;
-  border-color: #007aff;
+  border-color: var(--primary-color);
 }
 
 .navbar-btn.primary:hover {
@@ -334,11 +334,11 @@ main {
 
 .locale-select:hover {
   background-color: #ffffff;
-  border-color: #007aff;
+  border-color: var(--primary-color);
 }
 
 .locale-select:focus {
-  border-color: #007aff;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
@@ -448,7 +448,7 @@ main {
 
 .category-link:hover,
 .category-link.active {
-  background-color: #007aff;
+  background-color: var(--primary-color);
   color: #ffffff;
 }
 
@@ -499,7 +499,7 @@ main {
 }
 
 .filter-select:focus {
-  border-color: #007aff;
+  border-color: var(--primary-color);
 }
 
 /* Ana İçerik Alanı */
@@ -545,7 +545,7 @@ main {
 }
 
 .items-select:focus {
-  border-color: #007aff;
+  border-color: var(--primary-color);
 }
 
 .pagination-wrapper {
@@ -621,7 +621,7 @@ main {
 .product-price {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #007aff;
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
 }
 
@@ -674,15 +674,15 @@ main {
 }
 
 .pagination-btn:hover {
-  background-color: #007aff;
+  background-color: var(--primary-color);
   color: #ffffff;
-  border-color: #007aff;
+  border-color: var(--primary-color);
 }
 
 .pagination-btn.active {
-  background-color: #007aff;
+  background-color: var(--primary-color);
   color: #ffffff;
-  border-color: #007aff;
+  border-color: var(--primary-color);
 }
 
 .pagination-btn:disabled {
@@ -710,7 +710,7 @@ main {
 }
 
 .breadcrumb-link:hover {
-  color: #007aff;
+  color: var(--primary-color);
 }
 
 .breadcrumb-separator {
@@ -881,7 +881,7 @@ main {
 .price-value {
   font-size: 2rem;
   font-weight: 700;
-  color: #007aff;
+  color: var(--primary-color);
   line-height: 1;
 }
 
@@ -942,7 +942,7 @@ main {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #007aff, #5856d6);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: #ffffff;
 }
 
@@ -953,12 +953,12 @@ main {
 
 .btn-secondary {
   background-color: #ffffff;
-  color: #007aff;
-  border: 2px solid #007aff;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
 }
 
 .btn-secondary:hover {
-  background-color: #007aff;
+  background-color: var(--primary-color);
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -1046,7 +1046,7 @@ main {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #007aff, #5856d6, #af52de);
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), #af52de);
 }
 
 .form-title {
@@ -1090,7 +1090,7 @@ main {
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
-  border-color: #007aff;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
   background-color: #ffffff;
 }
@@ -1128,11 +1128,11 @@ main {
 
 .tab-button:hover {
   background-color: #e0e7ef;
-  color: #007aff;
+  color: var(--primary-color);
 }
 
 .tab-button.active {
-  border-bottom: 3px solid #007aff;
+  border-bottom: 3px solid var(--primary-color);
   background-color: #fff;
   color: var(--text-primary);
   z-index: 2;
@@ -1166,7 +1166,7 @@ main {
   text-align: center;
   font-size: 1.6rem;
   font-weight: 700;
-  color: #007aff;
+  color: var(--primary-color);
   margin-bottom: 2rem;
   margin-top: 0.5rem;
   letter-spacing: -0.5px;
@@ -1176,13 +1176,13 @@ main {
 .auth-form a {
   display: inline-block;
   margin-top: 1rem;
-  color: #5856d6;
+  color: var(--secondary-color);
   font-size: 0.97rem;
   text-decoration: none;
   transition: color 0.2s;
 }
 .auth-form a:hover {
-  color: #007aff;
+  color: var(--primary-color);
   text-decoration: underline;
 }
 
@@ -1218,13 +1218,13 @@ main {
 }
 
 .file-input-label:hover {
-  border-color: #007aff;
+  border-color: var(--primary-color);
   background-color: #f0f9ff;
-  color: #007aff;
+  color: var(--primary-color);
 }
 
 .file-input:focus + .file-input-label {
-  border-color: #007aff;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
 }
 
@@ -1250,7 +1250,7 @@ main {
 .submit-button {
   width: 100%;
   padding: 16px 24px;
-  background: linear-gradient(135deg, #007aff, #5856d6);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -1370,6 +1370,10 @@ footer {
   color: var(--text-secondary);
 }
 
+.footer-info a:hover{
+  color: var(--primary-color)
+}
+
 .social-links {
   display: flex;
   justify-content: flex-end;
@@ -1393,6 +1397,10 @@ footer {
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
+}
+
+.social-link:hover{
+  color: var(--primary-color);
 }
 
 /* Mobil Hamburger Menü */
@@ -1629,7 +1637,7 @@ footer {
   width: 20px;
   height: 20px;
   border: 2px solid #f3f3f3;
-  border-top: 2px solid #007aff;
+  border-top: 2px solid var(--primary-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -1676,7 +1684,7 @@ footer {
 }
 
 .empty-state .btn {
-  background-color: #007aff;
+  background-color: var(--primary-color);
   color: #ffffff;
   padding: 12px 24px;
   border-radius: 8px;

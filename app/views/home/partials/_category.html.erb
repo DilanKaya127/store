@@ -1,4 +1,4 @@
-  <h2>Kategoriler</h2>
+  <h2><%= t("categories.index.title") %></h2>
   <section class="category-section" data-controller="category-scroll"> 
     <% @categories.each do |category| %> 
       <%= link_to products_path(category_id: category.id), class: "category-card" do %>
