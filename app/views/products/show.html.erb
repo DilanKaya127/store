@@ -8,15 +8,41 @@
       <span class="breadcrumb-separator">›</span>
       <span class="breadcrumb-current"><%= truncate(@product.product_name, length: 30) %></span>
     </nav>
+    <!-- Admin Controls -->
+        <% if authenticated? && current_user.admin? %>
+          <% if can_manage_product?(@product) %>
+            <div class="admin-controls">
+              <div class="admin-actions">
+                <%= link_to edit_product_path(@product), class: "btn-admin edit" do %>
+                  <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                  Düzenle
+                <% end %>
+                <%= button_to @product, method: :delete,
+                                        data: { turbo_confirm: "Bu ürünü silmek istediğinizden emin misiniz?" },
+                                        class: "btn-admin delete" do %>
+                  <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    <line x1="10" y1="11" x2="10" y2="17"/>
+                    <line x1="14" y1="11" x2="14" y2="17"/>
+                  </svg>
+                  Sil
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
     <!-- Product Detail Container -->
     <div class="product-detail-container">
       <!-- Product Image Section -->
       <div class="product-image-section">
         <div class="product-image-wrapper">
           <% if @product.featured_image.present? %>
-            <%= image_tag @product.featured_image.attached? ? @product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
-                        alt: @product.product_name, 
-                        class: "product-detail-image" %>
+            <%= image_tag @product.featured_image.attached? ? @product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image",
+                          alt: @product.product_name,
+                          class: "product-detail-image" %>
           <% else %>
             <div class="product-placeholder">
               <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -35,31 +61,17 @@
           <!-- Product Header -->
           <div class="product-header">
             <h1 class="product-detail-title"><%= @product.product_name %></h1>
-            <!-- Stock Status Badge -->
-            <div class="stock-status-badge">
-              <% if @product.units_in_stock > 10 %>
-                <span class="stock-badge in-stock">✓ Stokta</span>
-              <% elsif @product.units_in_stock > 0 %>
-                <span class="stock-badge low-stock">⚠ Az Stokta</span>
-              <% else %>
-                <span class="stock-badge out-of-stock">✗ Stokta Yok</span>
-              <% end %>
-            </div>
           </div>
           <!-- Price Section -->
           <div class="price-section">
             <div class="price-main">
-              <span class="price-value"><%= @product.unit_price %></span>
+              <span class="price-value"><%= number_to_currency(@product.unit_price, unit: "₺", separator: ",", delimiter: ".") %></span>
             </div>
           </div>
           <!-- Product Details Grid -->
           <div class="product-details-grid">
             <div class="detail-item">
-              <div class="detail-label">Stok Miktarı</div>
-              <div class="detail-value"><%= @product.units_in_stock %> adet</div>
-            </div>
-            <div class="detail-item">
-              <div class="detail-label">Birim Ölçüsü</div>
+              <div class="detail-label">Birim</div>
               <div class="detail-value"><%= @product.quantity_per_unit %></div>
             </div>
             <% if @product.supplier.present? %>
@@ -90,33 +102,6 @@
               Favorilere Ekle
             </button>
           </div>
-        <% end %>
-        <!-- Admin Controls -->
-        <% if authenticated? && current_user.admin? %>
-          <% if can_manage_product?(@product) %>
-            <div class="admin-controls">
-              <h3 class="admin-title">Yönetici İşlemleri</h3>
-              <div class="admin-actions">
-                <%= link_to edit_product_path(@product), class: "btn-admin edit" do %>
-                  <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                  </svg>
-                  Düzenle
-                <% end %>
-                <%= button_to @product, method: :delete, 
-                          data: { turbo_confirm: "Bu ürünü silmek istediğinizden emin misiniz?" },
-                          class: "btn-admin delete" do %>
-                  <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                    <line x1="10" y1="11" x2="10" y2="17"/>
-                    <line x1="14" y1="11" x2="14" y2="17"/>
-                  </svg>
-                  Sil
-                <% end %>
-              </div>
-            </div>
-          <% end %>
         <% end %>
       </div>
     </div>

@@ -42,7 +42,8 @@
 /* Tüm animasyonlar için GPU ivmesi */
 .product-card,
 .submit-button,
-.form-input {
+.form-input,
+.supplier-card-row {
   will-change: transform;
 }
 
@@ -549,8 +550,47 @@ main {
 }
 
 .pagination-wrapper {
-  margin-top: 2rem;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.pagination-wrapper .pagination {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.pagination-wrapper .pagination a,
+.pagination-wrapper .pagination span,
+.pagination-wrapper .pagination .page,
+.pagination-wrapper .pagination .current {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  font-weight: 400;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.pagination-wrapper .pagination a:hover {
+  background: #f3f4f6;
+  color: var(--primary-color);
+}
+
+.pagination-wrapper .pagination .current {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  cursor: default;
 }
 
 .reorder_level_section{
@@ -730,7 +770,7 @@ main {
   gap: 4rem;
   /* background-color: #ffffff; */
   /* border-radius: 20px; */
-  padding: 3rem;
+  padding: 2rem 0;
   /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); */
   margin-bottom: 2rem;
 }
@@ -738,8 +778,8 @@ main {
 /* Product Image Section */
 .product-image-section {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  /* align-items: flex-start; */
 }
 
 .product-image-wrapper {
@@ -795,7 +835,7 @@ main {
 }
 
 .product-detail-title {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
@@ -809,9 +849,37 @@ main {
   justify-content: space-between;
   margin: 1.5rem;
   gap: 2rem;
-  padding: 1rem;
+  padding: 1.5rem;
   background-color: white;
-  border-radius: 12px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover Efektleri */
+.supplier-card-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(0, 122, 255, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.supplier-card-row:hover::before {
+  opacity: 1;
+}
+
+.supplier-card-row:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .supplier-card-image img {
@@ -824,7 +892,7 @@ main {
   flex-grow: 1;
 }
 
-.supplier-card-actions {
+#supplier-card-actions.admin-actions {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -888,7 +956,7 @@ main {
 /* Product Details Grid */
 .product-details-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .detail-item {
@@ -924,7 +992,8 @@ main {
 
 .btn-primary,
 .btn-secondary,
-.btn-disabled {
+.btn-disabled,
+.btn-wishlist {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -963,6 +1032,17 @@ main {
   transform: translateY(-1px);
 }
 
+.btn-wishlist{
+  background-color: #ffffff;
+  color: var(--primary-color);
+}
+
+.btn-wishlist:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 .btn-disabled {
   background-color: #f3f4f6;
   color: #9ca3af;
@@ -976,9 +1056,8 @@ main {
 
 /* Admin Controls */
 .admin-controls {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 2px solid #f3f4f6;
+  margin-top: 1rem;
+  padding-top: 1rem;
 }
 
 .admin-title {
@@ -991,6 +1070,8 @@ main {
 .admin-actions {
   display: flex;
   gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .btn-admin {
@@ -1029,11 +1110,11 @@ main {
 
 /* Form Container Styles - Apple/iPhone Style */
 .form-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  background-color: #ffffff;
+  max-width: 700px;
+  margin: 2.5rem auto;
+  background-color: #fff;
   border-radius: 16px;
-  padding: 2rem;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
@@ -1050,126 +1131,82 @@ main {
 }
 
 .form-title {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 2rem;
   text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 2.5rem;
+  margin-top: 0.5rem;
+  letter-spacing: -0.5px;
 }
 
-/* Form Field Groups */
-.field-group {
+.form-group-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
-  position: relative;
 }
 
-.field-label {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #374151;
-  margin-bottom: 0.5rem;
-  transition: color 0.2s ease;
+.field-group {
+  margin-bottom: 1.2rem;
 }
 
-/* Input Styles */
 .form-input,
 .form-select,
 .form-textarea {
   width: 100%;
-  padding: 12px 16px;
+  padding: 8px 12px;
   border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  font-size: 1rem;
-  background-color: #ffffff;
-  transition: all 0.2s ease;
+  border-radius: 8px;
+  font-size: 0.97rem;
+  background-color: #fff;
+  transition: all 0.2s;
   outline: none;
   font-family: inherit;
 }
 
-.form-input:focus,
-.form-select:focus,
-.form-textarea:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
-  background-color: #ffffff;
-}
-
-.form-input:hover,
-.form-select:hover,
-.form-textarea:hover {
-  border-color: #cbd5e1;
-}
-
-/* Select Dropdown */
+.form-input,
 .form-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  background-position: right 12px center;
-  background-repeat: no-repeat;
-  background-size: 16px;
-  padding-right: 40px;
+  min-height: 36px;
+  font-size: 0.97rem;
 }
 
-.tab-button {
-  flex: 1;
-  padding: 18px 0;
+.form-textarea {
+  min-height: 70px;
+  font-size: 0.97rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.submit-button,
+.btn-secondary {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 1.05rem;
   font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  background: none;
+  min-width: 150px;
+  min-height: 44px;
+  box-sizing: border-box;
   border: none;
-  border-bottom: 3px solid transparent;
-  color: #6b7280;
-  transition: background 0.2s, color 0.2s, border-bottom 0.2s;
-  outline: none;
-  background-color: #f3f4f6;
+  transition: background 0.2s, color 0.2s;
 }
 
-.tab-button:hover {
-  background-color: #e0e7ef;
+.btn-secondary {
+  background: #f3f4f6;
   color: var(--primary-color);
+  border: none;
+  font-weight: 600;
 }
 
-.tab-button.active {
-  border-bottom: 3px solid var(--primary-color);
-  background-color: #fff;
-  color: var(--text-primary);
-  z-index: 2;
-}
-
-.auth-form {
-  background: #fff;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-  padding: 2.5rem 2rem 2rem 2rem;
-  /* margin-top: -2px; */
-  animation: fadeIn 0.4s;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.form-container {
-  max-width: 420px;
-  margin: 2.5rem auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-  padding: 0;
-  overflow: hidden;
-}
-
-.form-title {
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: 700;
+.btn-secondary:hover {
+  background: #f3f4f6;
   color: var(--primary-color);
-  margin-bottom: 2rem;
-  margin-top: 0.5rem;
-  letter-spacing: -0.5px;
 }
 
 /* Giriş/Kayıt formu içindeki "Forgot password?" linki */
@@ -1515,7 +1552,7 @@ footer {
   }
   
   .product-detail-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   .price-value {
@@ -1559,7 +1596,7 @@ footer {
   }
   
   .product-detail-title {
-    font-size: 1.8rem;
+    font-size: 1.2rem;
   }
   
   .price-value {
@@ -1573,7 +1610,8 @@ footer {
   
   .btn-primary,
   .btn-secondary,
-  .btn-disabled {
+  .btn-disabled,
+  .btn-wishlist {
     padding: 14px 20px;
     font-size: 1rem;
   }

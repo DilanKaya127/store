@@ -2,24 +2,24 @@
   <h2 class="form-title">Ürün Ekle</h2>
   
   <%= form_with model: product, local: true do |form| %>
-    <!-- Product Name -->
-    <div class="field-group">
-      <%= form.label :product_name, "Ürün Adı", class: "field-label" %>
-      <%= form.text_field :product_name, class: "form-input", placeholder: "Ürün adını girin" %>
-    </div>
-
-    <!-- Category -->
-    <div class="field-group">
-      <%= form.label :category_id, "Kategori", class: "field-label" %>
-      <%= form.select :category_id, 
-          options_from_collection_for_select(@categories, :id, :category_name, product.category_id),
-          { prompt: "Kategori seçin" }, 
-          { class: "form-select" } %>
+    <!-- Name & Category yan yana -->
+    <div class="form-group-row">
+      <div class="field-group">
+        <%= form.label :product_name, "Ürün Adı", class: "field-label" %>
+        <%= form.text_field :product_name, class: "form-input", placeholder: "Ürün adını girin" %>
+      </div>
+      <div class="field-group">
+        <%= form.label :category_id, "Kategori", class: "field-label" %>
+        <%= form.select :category_id,
+                        options_from_collection_for_select(@categories, :id, :category_name, product.category_id),
+                        { prompt: "Kategori seçin" },
+                        { class: "form-select" } %>
+      </div>
     </div>
 
     <!-- Quantity Per Unit -->
     <div class="field-group">
-      <%= form.label :quantity_per_unit, "Birim Başına Miktar", class: "field-label" %>
+      <%= form.label :quantity_per_unit, "Birim", class: "field-label" %>
       <%= form.rich_text_area :quantity_per_unit, class: "form-textarea rich-textarea", placeholder: "Ürün açıklamasını girin" %>
     </div>
 
@@ -70,7 +70,10 @@
       <%= form.check_box :discontinued, class: "form-checkbox" %>
     </div>
 
-    <!-- Submit Button -->
-    <%= form.submit "Ürünü Kaydet", class: "submit-button" %>
+    <!-- Submit & Cancel Buttons yan yana ve eşit boyutlu -->
+    <div class="form-actions">
+      <%= link_to "İptal", products_path, class: "btn-secondary" %>
+      <%= form.submit "Ürünü Kaydet", class: "submit-button" %>
+    </div>
   <% end %>
 </div>

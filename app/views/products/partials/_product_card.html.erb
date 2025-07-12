@@ -2,30 +2,37 @@
     <div class="products-grid" id="products">
         <% @products.each do |product| %>
             <div class="product-card" onclick="window.location.href='<%= product_path(product.id) %>'">
-                <% if product.featured_image.present? %>
-                    <%= image_tag product.featured_image.attached? ? product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
-                        alt: product.product_name, 
-                        class: "product-image" %>
+                <button class="btn-wishlist add-to-wishlist" style="padding: 4px 10px; font-size: 0.85rem;">
+              <svg class="btn-icon" style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </button>
+            <% if product.featured_image.present? %>
+                    <%= image_tag product.featured_image.attached? ? product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image",
+                                  alt: product.product_name,
+                                  class: "product-image" %>
                 <% else %>
-                    <%= image_tag "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
-                    alt: "Resim yok", 
-                    class: "product-image" %>
+                    <%= image_tag "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image",
+                                  alt: "Resim yok",
+                                  class: "product-image" %>
                 <% end %>
                         
                 <div class="product-info">
+                
                     <h3 class="product-name"><%= product.product_name %></h3>
                     <div class="product-price">
                         <%= number_to_currency(product.unit_price, unit: "₺", separator: ",", delimiter: ".") %>
                     </div>
+
+                    <div class="product-actions">
+                    <button class="btn-secondary add-to-cart" style="padding: 4px 10px; font-size: 0.85rem;">
+                <svg class="btn-icon" style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M3 3h2l.4 2m0 0L8 15h9l3-6H6.4m0 0L5 7H3m15 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-9 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                </svg>
+                Sepete Ekle
+              </button>
+          </div>
                             
-                    <% stock_count = product.units_in_stock || 0 %>
-                    <% if stock_count > 10 %>
-                        <span class="product-stock in-stock"><%= stock_count %> adet stokta</span>
-                    <% elsif stock_count > 0 %>
-                        <span class="product-stock low-stock"><%= stock_count %> adet stokta</span>
-                    <% else %>
-                        <span class="product-stock out-of-stock">Stokta yok</span>
-                    <% end %>
                 </div>
             </div>
         <% end %>

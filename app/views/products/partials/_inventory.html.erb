@@ -1,10 +1,13 @@
+<div class="stock-status-badge">
 <% if product.units_in_stock > 10 %>
 <% elsif product.units_in_stock < 10 && product.units_in_stock > 0 %>
-  <p>Stoklar tükenmek üzere. Acele edin!</p>
+<span class="stock-badge low-stock">⚠ Stoklar tükenmek üzere. Acele edin!</span>
 <% else %>
-  <p>Stok tükendi. Tekrar stoğa girince haber almak ister misin?</p>
+  <span class="stock-badge out-of-stock">✗ Stok tükendi</span>
+  <p>Tekrar stoğa girince haber almak ister misin?</p>
   <%= form_with model: [product, Subscriber.new] do |form| %>
     <%= form.email_field :email, placeholder: "you@example.com", required: true %>
     <%= form.submit "Submit" %>
   <% end %>
 <% end %>
+</div>
