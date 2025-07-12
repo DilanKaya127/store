@@ -1,5 +1,4 @@
 class Supplier < ApplicationRecord
-
   has_many :users, foreign_key: "supplier_id", primary_key: "id", dependent: :destroy
   has_many :products, foreign_key: "supplier_id", primary_key: "id", dependent: :destroy
 

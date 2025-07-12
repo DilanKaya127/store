@@ -8,7 +8,7 @@ namespace :products do
         puts "⏭️ Skipping #{product.name}, already has an image"
         next
       end
-      
+
       sanitized_name = product.name
         .downcase
         .tr("ğüşıöç", "gusioc")    # Türkçe karakter dönüşümü

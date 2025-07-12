@@ -20,7 +20,7 @@ class ProductTest < ActiveSupport::TestCase
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal "In stock", mail.subject
-    assert_equal [subscriber.email], mail.to
+    assert_equal [ subscriber.email ], mail.to
     assert_match "Good news", mail.body.encoded
   end
 end

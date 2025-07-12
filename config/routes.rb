@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get "home/index"
-  resources :users, only: [:new, :create]
-  resource :session, only: [:new, :create, :destroy]
-  resource :unsubscribe, only: [:show]
+  resources :users, only: [ :new, :create ]
+  resource :session, only: [ :new, :create, :destroy ]
+  resource :unsubscribe, only: [ :show ]
   resources :passwords, param: :token
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :products do
-    resources :subscribers, only: [:create]
+    resources :subscribers, only: [ :create ]
   end
-  resources :categories, only: [:index, :show]
+  resources :categories, only: [ :index, :show ]
   get "/my_products", to: "products#my_products", as: :my_products
   get "/profile", to: "users#show", as: :profile
 
