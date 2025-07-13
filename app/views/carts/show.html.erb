@@ -1,0 +1,42 @@
+<div class="cart-container">
+  <div class="cart-title">Sepetim</div>
+
+  <% if @cart.cart_items.any? %>
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Ürün</th>
+          <th>Fiyat</th>
+          <th>Adet</th>
+          <th>Toplam</th>
+          <th>İşlem</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart.cart_items.each do |cart_item| %>
+          <%= render partial: "cart_items/item", locals: { cart_item: cart_item } %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="cart-details">
+      <p><strong>İndirim:</strong> <%= @cart.discount_applied ? "Uygulandı" : "Yok" %></p>
+      <p><strong>Toplam Tutar:</strong> <%= number_to_currency(@cart.total_price || 0) %></p>
+      <p><strong>Oluşturulma:</strong> <%= @cart.created_at.strftime("%d %B %Y, %H:%M") %></p>
+    </div>
+
+    <div class="cart-actions">
+      <%= link_to "Alışverişe Devam Et", products_path, class: "btn btn-secondary" %>
+      <%= link_to "Satın Al", checkout_cart_path(@cart), method: :post, class: "btn btn-primary" %>
+    </div>
+  <% else %>
+    <div class="cart-empty-state">
+      <div class="empty-icon">🛒</div>
+      <h2>Sepetiniz boş</h2>
+      <p>Alışverişe başlamak için ürünleri inceleyin.</p>
+      <%= link_to "Ürünlere Göz At", products_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+

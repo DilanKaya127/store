@@ -1808,3 +1808,134 @@ footer {
 .dropdown-item.logout-btn {
   color: #ef4444;
 }
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.cart-table th,
+.cart-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.cart-table th {
+  background-color: #f4f4f4;
+  text-align: left;
+}
+
+.cart-details p {
+  margin: 4px 0;
+}
+
+.btn {
+  padding: 6px 10px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.btn.success {
+  background-color: #2ecc71;
+}
+
+.btn.delete {
+  background-color: #e74c3c;
+}
+
+/* Sepet (Cart) Sayfası - Sade ve Modern */
+.cart-container {
+  max-width: 700px;
+  margin: 2.5rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 2rem 2.5rem;
+  overflow: hidden;
+}
+
+.cart-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-bottom: 2rem;
+  background: none;
+}
+
+.cart-table th, .cart-table td {
+  background: #f8f9fa;
+  border: none;
+  padding: 14px 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.cart-table th {
+  font-weight: 600;
+  background: #f4f4f4;
+}
+
+.cart-table td {
+  text-align: center;
+}
+
+.cart-table tr {
+  transition: box-shadow 0.2s;
+}
+
+.cart-table tr:hover {
+  box-shadow: 0 2px 8px rgba(0,122,255,0.08);
+}
+
+.cart-details {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.cart-details p {
+  margin: 0.5rem 0;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.cart-empty-state {
+  text-align: center;
+  color: #6b7280;
+  padding: 3rem 1rem;
+}
+
+.cart-empty-state h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #374151;
+}
+
+.cart-empty-state .empty-icon {
+  font-size: 3rem;
+  opacity: 0.2;
+  margin-bottom: 1rem;
+}
+

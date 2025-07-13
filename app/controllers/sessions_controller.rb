@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   allow_unauthenticated_access only: %i[ new create ]
-  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_session_url, alert: "Try again later." }
+  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_session_url, alert: "Daha sonra tekrar deneyiniz." }
 
   def new
   end
@@ -13,6 +13,8 @@ class SessionsController < ApplicationController
       # Modern Rails authentication sistemi kullan
       start_new_session_for(user)
 
+      merge_guest_cart_to_user
+
       redirect_to after_authentication_url
     else
       flash.now[:alert] = "Email veya şifre hatalı"
@@ -22,6 +24,6 @@ class SessionsController < ApplicationController
 
   def destroy
     terminate_session
-    redirect_to root_path
+    redirect_to root_path, notice: "Oturumunuz kapatıldı."
   end
 end

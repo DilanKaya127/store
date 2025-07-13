@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
 
+  has_many :carts
+
   belongs_to :supplier, foreign_key: "supplier_id", primary_key: "id", optional: true
   belongs_to :customer, foreign_key: "customer_id", primary_key: "id"
 
@@ -53,4 +55,8 @@ class User < ApplicationRecord
   def can_manage_products?
     admin? && supplier.present?
   end
+
+  def current_cart
+    carts.find_or_create_by(status: "open")
+  end  
 end

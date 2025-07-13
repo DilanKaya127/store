@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     I18n.with_locale(locale, &action)
   end
 
-  helper_method :current_user, :admin_user?, :can_manage_product?
+  helper_method :current_user, :admin_user?, :can_manage_product?, :current_cart
 
   private
 
@@ -49,6 +49,30 @@ class ApplicationController < ActionController::Base
   def ensure_product_ownership
     unless can_manage_product?(@product)
       redirect_to products_path, alert: "Bu ürünü düzenleme yetkiniz yok."
+    end
+  end
+
+  def current_cart
+    if session[:cart_id]
+      Cart.find_by(id: session[:cart_id]) || create_new_cart
+    else
+      create_new_cart
+    end
+  end
+
+  def create_new_cart
+    cart = Cart.new
+    cart.user_id = current_user.id if current_user
+    cart.session_id = session.id.to_s unless current_user
+    cart.save
+    session[:cart_id] = cart.id
+    cart
+  end
+
+  def merge_guest_cart_to_user
+    guest_cart = Cart.find_by(session_id: session.id.to_s, status: "open")
+    if guest_cart && current_user
+      guest_cart.update(user_id: current_user.id, session_id: nil)
     end
   end
 end

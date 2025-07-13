@@ -16,6 +16,16 @@ Rails.application.routes.draw do
     resources :subscribers, only: [ :create ]
   end
   resources :categories, only: [ :index, :show ]
+
+  resources :carts do
+    resources :cart_items, only: [ :create, :update, :destroy, :edit ]
+    member do
+      post "checkout"
+    end
+  end
+  # Bu yapı şu URL’yi üretir: POST /carts/:id/checkout
+  # Bu yapı /carts/:cart_id/cart_items/:id gibi yollar üretir
+
   get "/my_products", to: "products#my_products", as: :my_products
   get "/profile", to: "users#show", as: :profile
 
