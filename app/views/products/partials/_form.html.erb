@@ -1,6 +1,4 @@
-<div class="form-container" data-controller="product-form">
-  <h2 class="form-title">Ürün Ekle</h2>
-  
+<div class="form-container" data-controller="product-form">  
   <%= form_with model: product, local: true do |form| %>
     <!-- Name & Category yan yana -->
     <div class="form-group-row">
@@ -72,7 +70,7 @@
 
     <!-- Submit & Cancel Buttons yan yana ve eşit boyutlu -->
     <div class="form-actions">
-      <%= link_to "İptal", products_path, class: "btn-secondary" %>
+      <%= link_to "İptal", my_products_path, class: "btn-secondary" %>
       <%= form.submit "Ürünü Kaydet", class: "submit-button" %>
     </div>
   <% end %>

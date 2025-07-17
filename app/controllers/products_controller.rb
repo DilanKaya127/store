@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @cart = current_cart
   end
 
   def new

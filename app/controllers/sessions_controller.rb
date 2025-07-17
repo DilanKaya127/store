@@ -10,12 +10,18 @@ class SessionsController < ApplicationController
     user = User.find_by(email_address: params[:email_address])
 
     if user && user.authenticate(params[:password])
+      merged_cart = merge_guest_cart_to_user
       # Modern Rails authentication sistemi kullan
-      start_new_session_for(user)
+      @session = start_new_session_for(user)
+      Current.session = @session
+      session[:session_id] = @session.id
 
-      merge_guest_cart_to_user
+      # Eğer birleştirme başarılıysa yeni sepeti aktif yap
+      session[:cart_id] = merged_cart&.id if merged_cart.present?
+      # flash[:notice] ||= "Sepetiniz başarıyla birleştirildi."
 
-      redirect_to after_authentication_url
+      # redirect_to after_authentication_url, notice: "Giriş başarılı!"
+      redirect_to root_path
     else
       flash.now[:alert] = "Email veya şifre hatalı"
       render :new, status: :unprocessable_entity

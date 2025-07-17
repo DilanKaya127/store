@@ -1,40 +1,38 @@
 <h2>En çok sipariş edilen ürünler</h2>
 <section class="reorder_level_section">
-<% if @products.present? %>
+  <% if @products.present? %>
     <div class="products-grid" id="products">
-        <% @products.each do |product| %>
-            <div class="product-card" onclick="window.location.href='<%= product_path(product.id) %>'">
-                <% if product.featured_image.present? %>
-                    <%= image_tag product.featured_image.attached? ? product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
+      <% @products.each do |product| %>
+        <div class="product-card" onclick="window.location.href='<%= product_path(product.id) %>'">
+          <% if product.featured_image.present? %>
+            <%= image_tag product.featured_image.attached? ? product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
                         alt: product.product_name, 
                         class: "product-image" %>
-                <% else %>
-                    <%= image_tag "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
+          <% else %>
+            <%= image_tag "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
                     alt: "Resim yok", 
                     class: "product-image" %>
-                <% end %>
-                        
-                <div class="product-info">
-                    <h3 class="product-name"><%= product.product_name %></h3>
-                    <div class="product-price">
-                        <%= number_to_currency(product.unit_price, unit: "₺", separator: ",", delimiter: ".") %>
-                    </div>
-                </div>
+          <% end %>
+          <div class="product-info">
+            <div class="product-price">
+              <%= number_to_currency(product.unit_price, unit: "₺", separator: ",", delimiter: ".") %>
             </div>
-        <% end %>
+            <h3 class="product-name"><%= product.product_name %></h3>
+          </div>
+        </div>
+      <% end %>
     </div>
-<% end %>
+  <% end %>
 </section>
-
 <script>
-    // Ürün kartlarına hover efekti için ek JavaScript
-    document.querySelectorAll('.product-card').forEach(function(card) {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
+  // Ürün kartlarına hover efekti için ek JavaScript
+  document.querySelectorAll('.product-card').forEach(function(card) {
+      card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px)';
+      });
+
+      card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+      });
+  });
 </script>

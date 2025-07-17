@@ -55,8 +55,4 @@ class User < ApplicationRecord
   def can_manage_products?
     admin? && supplier.present?
   end
-
-  def current_cart
-    carts.find_or_create_by(status: "open")
-  end  
 end
