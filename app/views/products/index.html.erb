@@ -5,20 +5,3 @@
         <%= render "products/partials/product_card", products: @products %>
     </div>
 </div>
-
-<script>
-    # // Arama otomatik gönderim (debounce ile)
-    let searchTimeout;
-    document.querySelector('.search-input').addEventListener('input', function(e) {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            this.closest('form').submit();
-        }, 500); // 500ms bekle
-    });
-
-    # // Mobil menü toggle (gelecekte eklenebilir)
-    function toggleMobileMenu() {
-        const sidebar = document.querySelector('.sidebar');
-        sidebar.classList.toggle('mobile-open');
-    }
-</script>

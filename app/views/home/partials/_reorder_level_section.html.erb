@@ -1,9 +1,9 @@
 <h2>En çok sipariş edilen ürünler</h2>
 <section class="reorder_level_section">
   <% if @products.present? %>
-    <div class="products-grid" id="products">
+    <div class="products-grid" id="products" data-controller="hover-card">
       <% @products.each do |product| %>
-        <div class="product-card" onclick="window.location.href='<%= product_path(product.id) %>'">
+        <div class="product-card" data-hover-card onclick="window.location.href='<%= product_path(product.id) %>'">
           <% if product.featured_image.present? %>
             <%= image_tag product.featured_image.attached? ? product.featured_image : "https://via.placeholder.com/300x200/E5E7EB/6B7280?text=No+Image", 
                         alt: product.product_name, 
@@ -24,15 +24,3 @@
     </div>
   <% end %>
 </section>
-<script>
-  // Ürün kartlarına hover efekti için ek JavaScript
-  document.querySelectorAll('.product-card').forEach(function(card) {
-      card.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-5px)';
-      });
-
-      card.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
-      });
-  });
-</script>

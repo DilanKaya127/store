@@ -45,14 +45,14 @@
             </div>
           </div>
           <!-- Orta: Arama -->
-          <div class="navbar-search">
+          <div class="navbar-search" data-controller="ui">
             <div class="search-wrapper">
-              <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg class="search-icon" data-ui-target="searchIcon" data-action="click->ui#submitSearch" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <path d="M21 21l-4.35-4.35"></path>
               </svg>
               <%= form_with url: products_path, method: :get, local: true, class: "search-form" do |form| %>
-                <%= form.text_field :search, placeholder: "Ürün ara...", class: "search-input", value: params[:search] %>
+                <%= form.text_field :search, placeholder: "Ürün ara...", class: "search-input", value: params[:search], data: { ui_target: "searchInput" } %>
               <% end %>
             </div>
           </div>
@@ -67,7 +67,7 @@
                 <span>Sepet</span>
               <% end %>
             <% end %>
-            <%= link_to new_session_path, class: "navbar-btn" do %>
+            <%= link_to favorites_path, class: "navbar-btn" do %>
               <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
               </svg>

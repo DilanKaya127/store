@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
   resources :products do
     resources :subscribers, only: [ :create ]
+    resource :favorite, only: [ :create, :destroy ]
   end
+
+  resources :favorites, only: [ :index ]
+
   resources :categories, only: [ :index, :show ]
 
   resources :carts do

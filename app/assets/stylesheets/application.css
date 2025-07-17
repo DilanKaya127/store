@@ -1145,10 +1145,13 @@ main {
   color: var(--primary-color);
 }
 
-.btn-wishlist:hover {
-  background-color: var(--primary-color);
-  color: #ffffff;
-  transform: translateY(-1px);
+.btn-wishlist:before {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(0, 122, 255, 0.05));
+}
+
+.btn-wishlist:hover::before {
+  opacity: 1;
 }
 
 .btn-disabled {

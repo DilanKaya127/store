@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
 
   has_many :carts
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_products, through: :favorites, source: :product
 
   belongs_to :supplier, foreign_key: "supplier_id", primary_key: "id", optional: true
   belongs_to :customer, foreign_key: "customer_id", primary_key: "id"

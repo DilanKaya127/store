@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_13_133948) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_17_093025) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -124,6 +124,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_13_133948) do
     t.string "photo_path", limit: 8000
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_favorites_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_favorites_on_user_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "order_details", id: { type: :string, limit: 8000 }, force: :cascade do |t|
     t.integer "order_id", null: false
     t.integer "product_id", null: false
@@ -224,6 +234,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_13_133948) do
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
   add_foreign_key "carts", "users"
+  add_foreign_key "favorites", "products"
+  add_foreign_key "favorites", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "subscribers", "products"
 end

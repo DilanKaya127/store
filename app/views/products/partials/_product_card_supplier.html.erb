@@ -1,6 +1,6 @@
 <% if @products && @products.any? %>
   <% @products.each do |product| %>
-    <div class="supplier-card-row" onclick="window.location.href='<%= product_path(product.id) %>'">
+    <div class="supplier-card-row" data-hover-card>
       <!-- Görsel (sol) -->
       <div class="supplier-card-image">
         <% if product.featured_image.present? %>
@@ -68,15 +68,3 @@
     <%= link_to "Tüm ürünleri görüntüle", products_path, class: "btn" %>
   </div>
 <% end %>
-<script>
-  // Supplier kartlarına hover efekti için ek JavaScript
-  document.querySelectorAll('.supplier-card-row').forEach(function(card) {
-      card.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-5px)';
-      });
-
-      card.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0)';
-      });
-  });
-</script>
