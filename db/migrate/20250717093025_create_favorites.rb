@@ -6,6 +6,6 @@ class CreateFavorites < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    add_index :favorites, [ :user_id, :product_id ], unique: true #aynı ürünün iki kere favorilenmemesi için
+    add_index :favorites, [ :user_id, :product_id ], unique: true # aynı ürünün iki kere favorilenmemesi için
   end
 end

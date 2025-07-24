@@ -11,6 +11,14 @@ export default class extends Controller {
       card.addEventListener("mouseleave", () => {
         card.style.transform = "translateY(0)"
       })
+      // Tıklama yönlendirmesi
+      card.addEventListener("click", (event) => {
+        const isButtonClick = event.target.closest("form, button, a")
+        if (isButtonClick) return // Sepete ekle vs gibi alanlara tıklanıyorsa yönlendirme yapma
+
+        const url = card.dataset.url
+        if (url) window.location.href = url
+      })
     })
   }
 }

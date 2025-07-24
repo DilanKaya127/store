@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show ]
   before_action :set_product, only: %i[ show edit update destroy ]
-  before_action :set_categories, only: [:index, :new, :edit]
-  before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
-  before_action :ensure_product_ownership, only: [:edit, :update, :destroy]
+  before_action :set_categories, only: [ :index, :new, :edit ]
+  before_action :require_admin, only: [ :new, :create, :edit, :update, :destroy ]
+  before_action :ensure_product_ownership, only: [ :edit, :update, :destroy ]
 
   def index
     @products = Product.all
@@ -129,7 +129,7 @@ class ProductsController < ApplicationController
 
     # Sayfa başına öğe sayısı
     per_page = params[:per_page]&.to_i || 20
-    per_page = 20 unless [20, 50, 100].include?(per_page)
+    per_page = 20 unless [ 20, 50, 100 ].include?(per_page)
     products = products.page(params[:page]).per(per_page)
 
     products
@@ -142,7 +142,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.expect(product: [:product_name, :quantity_per_unit, :featured_image, :units_in_stock, :unit_price, :category_id, :units_in_order, :reorder_level, :discontinued])
+    params.expect(product: [ :product_name, :quantity_per_unit, :featured_image, :units_in_stock, :unit_price, :category_id, :units_in_order, :reorder_level, :discontinued ])
   end
 
   def set_categories

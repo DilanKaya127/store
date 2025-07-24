@@ -1,11 +1,21 @@
-<%= form_with url: product_favorite_path(product),
-              method: product.favorited_by?(current_user) ? :delete : :post,
+<% is_favorited = product.favorited_by?(current_user) %>
+<% if current_user %>
+  <%= form_with url: product_favorite_path(product),
+              method: is_favorited ? :delete : :post,
               data: { turbo: true },
-              id: "product_#{product.id}_favorite",
-              class: "wishlist-form" do %>
-  <button class="btn-wishlist">
-    <svg class="btn-icon" style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="<%= product.favorited_by?(current_user) ? 'currentColor' : 'none' %>" stroke="currentColor">
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-    </svg>
-  </button>
+              id: "product_#{product.id}_favorite" do %>
+    <button class="btn-wishlist">
+      <svg class="btn-icon" style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="<%= is_favorited ? 'currentColor' : 'none' %>" stroke="currentColor">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </button>
+  <% end %>
+<% else %>
+  <%= link_to new_session_path, title: "Favorilere eklemek için giriş yapmalısınız." do %>
+    <button class="btn-wishlist">
+      <svg class="btn-icon" style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </button>
+  <% end %>
 <% end %>

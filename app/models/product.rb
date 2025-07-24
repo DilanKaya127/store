@@ -25,6 +25,7 @@ class Product < ApplicationRecord
   validates :units_in_stock, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   def favorited_by?(user)
+    return false if user.nil?
     favorites.exists?(user_id: user.id)
   end
 end

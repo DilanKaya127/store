@@ -1,9 +1,9 @@
-<h2>Favori Ürünleriniz 💖</h2>
+<h2>Favori Ürünleriniz</h2>
 <br>
-<% if current_user.favorite_products.any? %>
+<% if current_user && current_user.favorite_products.any? %>
   <div class="products-grid" id="products" data-controller="hover-card">
     <% current_user.favorite_products.each do |product| %>
-      <div class="product-card" data-hover-card>
+      <div class="product-card" data-hover-card data-url="<%= product_path(product) %>">
         <% is_favorited = product.favorited_by?(current_user) %>
         <%= render "/products/partials/favorite_button", product: product %>
         <% if product.featured_image.present? %>
