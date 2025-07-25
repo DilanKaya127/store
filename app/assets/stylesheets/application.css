@@ -99,6 +99,17 @@ main {
   flex-direction: column;
 }
 
+/* Büyük ekranlarda taşmayı önlemek için ana container'a da max-width ve responsive padding ekleyelim */
+.main-container, .content-area, .product-detail-container {
+  width: 100%;
+  max-width: 1200px;
+  min-width: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 /* Ana İçerik Konteyneri */
 .main-container {
   /* max-width: 1400px; */
@@ -185,9 +196,12 @@ main {
   /* padding: 0 2rem; */
 }
 
-.navbar-container, .cart-main-wrapper {
+.navbar-container {
   width: 100%;
   max-width: 1200px;
+  min-width: 0;
+  box-sizing: border-box;
+  /* overflow-x: auto; */
 }
 
 /* Sol Taraf - Logo ve Menü */
@@ -1041,7 +1055,7 @@ main {
   width: 100%;
   height: 100%;
   min-height: 56px;
-  max-width: 250px;
+  max-width: 250px; 
   padding: 16px 24px;
   font-size: 1.1rem;
 }
@@ -1604,18 +1618,20 @@ footer {
 
 @media (max-width: 1024px) {
   .navbar-container {
-    padding: 0 1.5rem;
+    padding: 0 0.5rem;
+    gap: 1rem;
+    height: auto;
   }
-  
   .navbar-search {
-    max-width: 300px;
-    margin: 0 1rem;
+    max-width: 200px;
+    min-width: 0;
   }
 }
 
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;
+    align-items: stretch; /*olmalı mı?*/
     gap: 1rem;
   }
 
@@ -1631,7 +1647,10 @@ footer {
     max-width: 100vw;
     overflow-x: auto;
     box-sizing: border-box;
-    /* position: static; */
+    position: static;
+    margin: 0 0 1rem 0;
+    padding: 0.5rem 0.5rem;
+    z-index: auto;
   }
   
   .products-grid {
@@ -1639,18 +1658,49 @@ footer {
     gap: 1rem;
   }
 
-  .reorder_level_section .products-grid{
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+  .product-card {
+    min-width: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: auto;
   }
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    min-width: 0;
+  }
+
+  .reorder_level_section .products-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+    /* min-width: 0; */
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 0; /*taşmayı önlemek için*/
+  }
+
+  .reorder_level_section .product-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  } 
 
   .form-group-row {
     grid-template-columns: 1fr;
   }
   
   .navbar-container {
-    height: 60px;
-    padding: 0 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    height: auto;
+    padding: 0 0.2rem;
+  }
+
+  .navbar-left, .navbar-right {
+    gap: 0.5rem;
   }
   
   .navbar-menu {
@@ -1658,17 +1708,14 @@ footer {
   }
   
   .navbar-search {
-    max-width: 200px;
-    margin: 0 0.5rem;
+    /* margin: 0 0.5rem; */
+    max-width: 120px;
+    min-width: 0;
   }
 
   .search-input {
     padding: 10px 16px 10px 40px;
     font-size: 0.9rem;
-  }
-  
-  .navbar-right {
-    gap: 0.5rem;
   }
   
   .navbar-btn {
@@ -1697,6 +1744,18 @@ footer {
   .product-detail-container {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .product-detail-container,
+  .product-info-section,
+  .product-image-section {
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 0.5rem !important;
+    overflow-x: auto;
+    display: block;
   }
 
   .product-image-section,
@@ -1752,16 +1811,51 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .main-container {
+    padding: 0.5rem;
+  }
+
   .products-grid {
     grid-template-columns: 1fr;
   }
 
-  .products-grid, .reorder_level_section .products-grid {
-    gap: 0.5rem;
+  .product-card {
+    min-width: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+    /* overflow-x: auto; */
+    padding: 0.5rem;    
   }
-  
-  .main-container {
-    padding: 0.5rem;
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    min-width: 0;
+  }
+
+  .product-info-section, .product-image-section, .product-detail-container {
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: auto;
+    padding: 0.5rem !important;
+    display: block;
+  }
+  .product-details-grid, .detail-item {
+    min-width: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: auto;
+  }
+
+  .reorder_level_section .products-grid {
+    grid-template-columns: 1fr;
+    /* gap: 0.3rem;
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    overflow-x: auto;
+    box-sizing: border-box; */
   }
 
   .product-detail-container {
@@ -1803,7 +1897,12 @@ footer {
   }
   
   .navbar-container {
-    position: relative;
+    /* position: relative; */
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+    padding: 0 0.1rem;
+    min-width: 0;
   }
   
   .navbar-menu,
@@ -1815,6 +1914,12 @@ footer {
   .top-navbar.mobile-menu-open .navbar-menu,
   .top-navbar.mobile-menu-open .navbar-search,
   .top-navbar.mobile-menu-open .user-menu {
+    width: 100vw;
+    left: 0;
+    right: 0;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: auto;
     display: flex;
     position: absolute;
     top: 100%;
@@ -1829,15 +1934,23 @@ footer {
   }
   
   .navbar-search {
-    margin: 0;
+    width: 100%;
     max-width: 100%;
+    min-width: 0;
+    margin: 0.2rem 0;
+  }
+
+  .navbar-left, .navbar-right {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.2rem;
   }
 
   .category-section {
     padding: 1rem 0.5rem;
     gap: 0.5rem;
     max-width: 100vw;
-    overflow-x: auto;
+    /* overflow-x: auto; */
   }
   .category-card {
     width: 120px;

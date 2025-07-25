@@ -3,7 +3,6 @@ class CartItemsController < ApplicationController
     before_action :set_cart_item, only: [ :edit, :update, :destroy ]
 
     def create
-        logger.debug "Gelen Params: #{params.permit!.inspect}"
         @cart = current_cart || Cart.find(params[:cart_id])
 
         # Sepet sahipliği kontrolü

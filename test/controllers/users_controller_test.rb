@@ -7,7 +7,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get create" do
-    post users_url, params: { user: { name: "Test User", email: "test@example.com", password: "securepassword" } }
-    assert_response :success # Or :redirect, depending on your controller action
+    post users_url, params: { user: { full_name: "Test User", email_address: "test@example.com", password: "securepassword" } }
+    assert_response :redirect # :success or :redirect, depending on your controller action
+    assert_redirected_to new_session_path
   end
 end

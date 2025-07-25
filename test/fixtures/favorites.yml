@@ -2,8 +2,8 @@
 
 one:
   user: one
-  product: one
+  product: alice_mutton
 
 two:
   user: two
-  product: two
+  product: alice_mutton

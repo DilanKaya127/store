@@ -59,4 +59,7 @@ en:
       6: "Meat/Poultry"
       7: "Produce"
       8: "Seafood"
+  product_mailer:
+    in_stock:
+      subject: "In stock"
 
