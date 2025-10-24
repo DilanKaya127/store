@@ -66,4 +66,4 @@ gem "bundler-audit", "~> 0.9.2", group: :development
 
 gem "kaminari"
 
-gem "simple_form", "~> 5.3"
+gem "simple_form", "~> 5.4"
